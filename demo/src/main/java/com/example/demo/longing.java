@@ -95,6 +95,9 @@ public class longing extends AppCompatActivity {
             return true;
         }
     }
+    public void test(){
+        return;
+    }
 
     public void checkUser() {
         String userUsername = loginUsername.getText().toString().trim();
