@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">demo</string>
+    <string name="title_home">主頁</string>
+    <string name="title_dashboard">用戶</string>
+    <string name="title_notifications">日記</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello</string>
+</resources>
