@@ -113,7 +113,7 @@ public class longing extends AppCompatActivity {
                     if (Objects.equals(passwordFromDB, userPassword)) {
                         // 密碼正確的處理邏輯
                         // 例如，你可以在這裡啟動一個新的活動或進行其他操作
-
+                        //test
                         Bundle bundle = new Bundle();
                         bundle.putString("username", userUsername);
 
