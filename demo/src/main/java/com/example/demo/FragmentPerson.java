@@ -92,7 +92,7 @@ public class FragmentPerson extends Fragment {
         personname = view.findViewById(R.id.personname);
 
         Intent intent = this.getActivity().getIntent();
-        String username=intent.getStringExtra("username");
+        String username=intent.getStringExtra("name");
         personname.setText(username);
         //Log.e("user", "test"+bundle.getString("username"));
         /*if(bundle !=null){

@@ -95,16 +95,12 @@ public class longing extends AppCompatActivity {
             return true;
         }
     }
-    public void test(){
-        return;
-    }
-
     public void checkUser() {
         String userUsername = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(userUsername);
+        Query checkUserDatabase = reference.orderByChild("name").equalTo(userUsername);
 
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -118,7 +114,7 @@ public class longing extends AppCompatActivity {
                         // 例如，你可以在這裡啟動一個新的活動或進行其他操作
                         //test
                         Bundle bundle = new Bundle();
-                        bundle.putString("username", userUsername);
+                        bundle.putString("name", userUsername);
 
                         Intent intent = new Intent(longing.this, nologin.class); // 將 CorrectLoginActivity 替換為實際的活動
                         intent.putExtras(bundle);
