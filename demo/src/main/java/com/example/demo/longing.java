@@ -115,7 +115,7 @@ public class longing extends AppCompatActivity {
                         //test
                         Bundle bundle = new Bundle();
                         bundle.putString("name", userUsername);
-
+                        Toast.makeText(longing.this, "登入成功!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(longing.this, nologin.class); // 將 CorrectLoginActivity 替換為實際的活動
                         intent.putExtras(bundle);
                         startActivity(intent);

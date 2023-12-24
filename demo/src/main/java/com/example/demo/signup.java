@@ -136,6 +136,8 @@ public class signup extends AppCompatActivity {
 
                             intent.putExtras(bundle);
                             startActivity(intent);
+
+                            finish();
                         }
                     }
 
