@@ -76,4 +76,3 @@ public class setting extends AppCompatActivity {
             }
         };
 }
-
