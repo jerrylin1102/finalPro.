@@ -96,7 +96,7 @@ public class signup extends AppCompatActivity {
             }
             else{
                 database=FirebaseDatabase.getInstance(); //取得數據庫實例
-                reference=database.getReference("users"); //取得路徑參考
+                reference=database.getReference("users");//取得路徑參考
 
                 //取得Edit Text輸入的內容
                 String account=signupAccount.getText().toString();
