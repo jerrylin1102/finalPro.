@@ -26,6 +26,7 @@
             <activity android:label="home_Search" android:name=".home_Search"/>
             <activity android:name=".home_Remove" android:label="home_Remove"/>
             <activity android:name=".home_help" android:label="home_help"/>
+            <activity android:name=".diet_inspection" android:label="home_inspection"/>
 
     </application>
 

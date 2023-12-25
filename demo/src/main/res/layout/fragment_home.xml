@@ -122,11 +122,11 @@
             android:id="@+id/inspection"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="200dp"
+            android:layout_marginTop="24dp"
             android:src="@drawable/img02"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textView3"
-            app:layout_constraintStart_toStartOf="@+id/textView3" />
+            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/textView8"
