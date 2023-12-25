@@ -104,20 +104,7 @@ public class signup extends AppCompatActivity {
                 String username=signupUsername.getText().toString();
                 String password=signupPassword.getText().toString();
 
-            /*DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-            if(accoount.equals(reference.orderByChild("username").equalTo(accoount))){
-                Toast.makeText(signup.this, "帳號重複，請嘗試其他組合!", Toast.LENGTH_SHORT).show();
-            }else{
-                //創建的Class，將資訊存入數據庫
-                HelperClass helperClass=new HelperClass(accoount,email,username,password);
-                reference.child(accoount).setValue(helperClass);
-
-                Toast.makeText(signup.this, "註冊成功! ", Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(signup.this,nologin.class);
-                startActivity(intent);
-            }*/
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-
                 reference.orderByChild("name").equalTo(account).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
