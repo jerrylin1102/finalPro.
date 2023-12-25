@@ -69,14 +69,22 @@ public class FragmentHome extends Fragment {
         Intent home_Add=new Intent(context,home_Add.class);
         Intent home_Remove=new Intent(context,home_Remove.class);
         Intent home_help=new Intent(context, home_help.class);
+        Intent home_inspection = new Intent(context, diet_inspection.class);
 
         ImageView imgAdd=view.findViewById(R.id.add);
         ImageView imgRemove=view.findViewById(R.id.remove);
         ImageView imgSearch=view.findViewById(R.id.search);
+        ImageView imgInspection = view.findViewById(R.id.inspection);
         ImageView imghelp=view.findViewById(R.id.help);
         Button button = view.findViewById(R.id.button);
 
         button.setOnClickListener(listener);
+        imgInspection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(home_inspection);
+            }
+        });
         imghelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
