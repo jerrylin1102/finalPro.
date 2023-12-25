@@ -25,8 +25,8 @@ public class setting extends AppCompatActivity {
     private ImageView imgBack;
     private TextView show;
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    /*FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;*/
     FragmentManager fragmentManager = getFragmentManager();
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class setting extends AppCompatActivity {
             imgBack=findViewById(R.id.imgBack);
             imgBack.setOnClickListener(lis);
 
-            firebaseDatabase = FirebaseDatabase.getInstance();
+            /*firebaseDatabase = FirebaseDatabase.getInstance();
             databaseReference = firebaseDatabase.getReference("users");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -65,7 +65,7 @@ public class setting extends AppCompatActivity {
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            });
+            });*/
 
         }
         private View.OnClickListener lis=new View.OnClickListener() {
