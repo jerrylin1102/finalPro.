@@ -96,13 +96,21 @@ public class signup extends AppCompatActivity {
             }
             else{
                 database=FirebaseDatabase.getInstance(); //取得數據庫實例
-                reference=database.getReference("users");//取得路徑參考
+                reference=database.getReference("users"); //取得路徑參考
+
+                /*userData userData = com.example.demo.userData.getInstance();
+                userData.setName(signupUsername.getText().toString());
+                userData.setEmail(signupEmail.getText().toString());
+                userData.setAccount(signupAccount.getText().toString());
+                userData.setPw(signupPassword.getText().toString());*/
 
                 //取得Edit Text輸入的內容
                 String account=signupAccount.getText().toString();
                 String email=signupEmail.getText().toString();
                 String username=signupUsername.getText().toString();
                 String password=signupPassword.getText().toString();
+
+
 
             /*DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
             if(accoount.equals(reference.orderByChild("username").equalTo(accoount))){

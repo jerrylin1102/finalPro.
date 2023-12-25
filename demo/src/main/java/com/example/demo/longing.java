@@ -113,6 +113,12 @@ public class longing extends AppCompatActivity {
                         // 密碼正確的處理邏輯
                         // 例如，你可以在這裡啟動一個新的活動或進行其他操作
                         //test
+                        userData userData = com.example.demo.userData.getInstance();
+                        //userData.setAccount(u.getText().toString());
+                        //userData.setEmail(signupEmail.getText().toString());
+                        userData.setAccount(userUsername);
+
+
                         Bundle bundle = new Bundle();
                         bundle.putString("name", userUsername);
                         Toast.makeText(longing.this, "登入成功!", Toast.LENGTH_SHORT).show();

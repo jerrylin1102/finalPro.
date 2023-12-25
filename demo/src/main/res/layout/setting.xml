@@ -24,4 +24,105 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_weight="3"
+                android:text="帳號：" />
+
+            <Button
+                android:id="@+id/btn_Account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@color/black"
+                android:text="Button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_weight="3"
+                android:text="密碼：" />
+
+            <Button
+                android:id="@+id/btn_Password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@color/black"
+                android:layout_weight="0"
+                android:text="Button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_weight="3"
+                android:text="暱稱：" />
+
+            <Button
+                android:id="@+id/btn_Username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:background="@drawable/custom_button"
+                android:textColor="@color/black"
+                android:layout_weight="0"
+                android:text="Button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_weight="3"
+                android:text="Email：" />
+
+            <Button
+                android:id="@+id/btn_Email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_weight="0"
+                android:background="@drawable/custom_button"
+                android:textColor="@color/black"
+                android:text="Button" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>
