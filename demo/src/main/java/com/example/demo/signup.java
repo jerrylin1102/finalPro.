@@ -96,7 +96,13 @@ public class signup extends AppCompatActivity {
             }
             else{
                 database=FirebaseDatabase.getInstance(); //取得數據庫實例
-                reference=database.getReference("users");//取得路徑參考
+                reference=database.getReference("users"); //取得路徑參考
+
+                /*userData userData = com.example.demo.userData.getInstance();
+                userData.setName(signupUsername.getText().toString());
+                userData.setEmail(signupEmail.getText().toString());
+                userData.setAccount(signupAccount.getText().toString());
+                userData.setPw(signupPassword.getText().toString());*/
 
                 //取得Edit Text輸入的內容
                 String account=signupAccount.getText().toString();
@@ -104,7 +110,22 @@ public class signup extends AppCompatActivity {
                 String username=signupUsername.getText().toString();
                 String password=signupPassword.getText().toString();
 
+
+
+            /*DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+            if(accoount.equals(reference.orderByChild("username").equalTo(accoount))){
+                Toast.makeText(signup.this, "帳號重複，請嘗試其他組合!", Toast.LENGTH_SHORT).show();
+            }else{
+                //創建的Class，將資訊存入數據庫
+                HelperClass helperClass=new HelperClass(accoount,email,username,password);
+                reference.child(accoount).setValue(helperClass);
+
+                Toast.makeText(signup.this, "註冊成功! ", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(signup.this,nologin.class);
+                startActivity(intent);
+            }*/
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
                 reference.orderByChild("name").equalTo(account).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
