@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +47,6 @@ public class FragmentPerson extends Fragment {
     public FragmentPerson() {
         // Required empty public constructor
     }
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -70,7 +72,6 @@ public class FragmentPerson extends Fragment {
         return fragment;
     }*/
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +79,6 @@ public class FragmentPerson extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
 
     }
 
@@ -91,25 +91,13 @@ public class FragmentPerson extends Fragment {
         Intent setting=new Intent(context,setting.class);
         personname = view.findViewById(R.id.personname);
 
+        /*HelperClass helperClass = new HelperClass(account, email, username, password);
+        reference.child(account).setValue(helperClass);*/
+        //---
+
         Intent intent = this.getActivity().getIntent();
-        String username=intent.getStringExtra("username");
+        String username=intent.getStringExtra("name");
         personname.setText(username);
-        //Log.e("user", "test"+bundle.getString("username"));
-        /*if(bundle !=null){
-
-            Log.e("user", username);
-            //TextView personName=view.findViewById(R.id.personname);
-            //personName.setText(username);
-            if (username != null) {//fix
-                TextView personName = view.findViewById(R.id.personname);
-                personName.setText(username);
-
-            } else {
-                // 如果用户名为空，可以添加默认值或进行其他处理
-                Toast.makeText(context, "Username is null", Toast.LENGTH_SHORT).show();
-                Log.e("FragmentPerson", "Username is null");
-            }
-        }*/
 
         ImageView imgSitting=view.findViewById(R.id.setting);
         ImageView imgmaterial=view.findViewById(R.id.material);
@@ -127,10 +115,8 @@ public class FragmentPerson extends Fragment {
             }
         });
 
-
         // Inflate the layout for this fragment
         return view;
-
     }
     @Override//f
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

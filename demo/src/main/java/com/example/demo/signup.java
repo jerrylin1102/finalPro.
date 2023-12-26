@@ -48,17 +48,69 @@ public class signup extends AppCompatActivity {
         signupButton.setOnClickListener(signup);
         loginRedirecText.setOnClickListener(loginR);
     }
+    public Boolean vaidateAccount(){
+        String val=signupAccount.getText().toString();
+        if(val.isEmpty()){
+            signupAccount.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            return false;
+        }else {
+            signupAccount.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
+            return true;
+        }
+    }
+    public Boolean vaidateEmail(){
+        String val=signupEmail.getText().toString();
+        if(val.isEmpty()){
+            signupEmail.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            return false;
+        }else {
+            signupEmail.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
+            return true;
+        }
+    }
+    public Boolean vaidatePassword(){
+        String val=signupPassword.getText().toString();
+        if(val.isEmpty()){
+            signupPassword.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            return false;
+        }else {
+            signupPassword.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
+            return true;
+        }
+    }
+    public Boolean vaidateUsername(){
+        String val=signupUsername.getText().toString();
+        if(val.isEmpty()){
+            signupUsername.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            return false;
+        }else {
+            signupUsername.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
+            return true;
+        }
+    }
     private View.OnClickListener signup=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            database=FirebaseDatabase.getInstance(); //取得數據庫實例
-            reference=database.getReference("users"); //取得路徑參考
+            if(!vaidatePassword()|!vaidateUsername()|!vaidateAccount()|!vaidateEmail()){
 
-            //取得Edit Text輸入的內容
-            String name=signupAccount.getText().toString();
-            String email=signupEmail.getText().toString();
-            String username=signupUsername.getText().toString();
-            String password=signupPassword.getText().toString();
+            }
+            else{
+                database=FirebaseDatabase.getInstance(); //取得數據庫實例
+                reference=database.getReference("users"); //取得路徑參考
+
+                /*userData userData = com.example.demo.userData.getInstance();
+                userData.setName(signupUsername.getText().toString());
+                userData.setEmail(signupEmail.getText().toString());
+                userData.setAccount(signupAccount.getText().toString());
+                userData.setPw(signupPassword.getText().toString());*/
+
+                //取得Edit Text輸入的內容
+                String account=signupAccount.getText().toString();
+                String email=signupEmail.getText().toString();
+                String username=signupUsername.getText().toString();
+                String password=signupPassword.getText().toString();
+
+
 
             /*DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
             if(accoount.equals(reference.orderByChild("username").equalTo(accoount))){
@@ -72,30 +124,37 @@ public class signup extends AppCompatActivity {
                 Intent intent=new Intent(signup.this,nologin.class);
                 startActivity(intent);
             }*/
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
 
-            reference.orderByChild("username").equalTo(name).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        // 帳號已存在，顯示錯誤訊息
-                        Toast.makeText(signup.this, "帳號重複，請嘗試其他組合!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // 帳號不存在，可以進行註冊
-                        HelperClass helperClass = new HelperClass(name, email, username, password);
-                        reference.child(name).setValue(helperClass);
+                reference.orderByChild("name").equalTo(account).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            // 帳號已存在，顯示錯誤訊息
+                            Toast.makeText(signup.this, "帳號重複，請嘗試其他組合!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // 帳號不存在，可以進行註冊
+                            HelperClass helperClass = new HelperClass(account, email, username, password);
+                            reference.child(account).setValue(helperClass);
 
-                        Toast.makeText(signup.this, "註冊成功! ", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(signup.this, nologin.class);
-                        startActivity(intent);
+                            Toast.makeText(signup.this, "註冊成功! ", Toast.LENGTH_SHORT).show();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", account);
+                            Intent intent = new Intent(signup.this, nologin.class);
+
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+
+                            finish();
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // 處理取消事件的邏輯
-                }
-            });
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // 處理取消事件的邏輯
+                    }
+                });
+            }
 
 
         }

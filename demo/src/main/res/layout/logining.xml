@@ -93,15 +93,16 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
     <TextView
+        android:id="@+id/loginRedirecText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:padding="8dp"
-        android:text="Not yet registered? Signup Now"
-        android:textSize="14sp"
+        android:text="Not yet registered? Sign up Now"
         android:textAlignment="center"
-        android:id="@+id/loginRedirecText"
         android:textColor="@color/iconcolor"
-        android:layout_marginBottom="20dp"/>
+        android:textSize="14sp" />
 
 </LinearLayout>

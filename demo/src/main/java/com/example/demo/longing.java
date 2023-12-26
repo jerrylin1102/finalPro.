@@ -95,16 +95,12 @@ public class longing extends AppCompatActivity {
             return true;
         }
     }
-    public void test(){
-        return;
-    }
-
     public void checkUser() {
         String userUsername = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUserDatabase = reference.orderByChild("username").equalTo(userUsername);
+        Query checkUserDatabase = reference.orderByChild("name").equalTo(userUsername);
 
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -117,9 +113,15 @@ public class longing extends AppCompatActivity {
                         // 密碼正確的處理邏輯
                         // 例如，你可以在這裡啟動一個新的活動或進行其他操作
                         //test
-                        Bundle bundle = new Bundle();
-                        bundle.putString("username", userUsername);
+                        userData userData = com.example.demo.userData.getInstance();
+                        //userData.setAccount(u.getText().toString());
+                        //userData.setEmail(signupEmail.getText().toString());
+                        userData.setAccount(userUsername);
 
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name", userUsername);
+                        Toast.makeText(longing.this, "登入成功!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(longing.this, nologin.class); // 將 CorrectLoginActivity 替換為實際的活動
                         intent.putExtras(bundle);
                         startActivity(intent);
