@@ -3,8 +3,10 @@ package com.example.demo;
 import android.accounts.Account;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +40,9 @@ public class setting extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
 
+    private static final String PREFERENCE_FILE_NAME = "login_preferences";
+    private static final String KEY_IS_LOGGED_IN = "is_logged_in";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,21 +69,26 @@ public class setting extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("users");
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot userSnapshot : snapshot.getChildren())
-                {
-                    userData userData = com.example.demo.userData.getInstance();
-                    String account = userSnapshot.child("name").getValue(String.class);
-                    if(userData.getAccount().equals(account)) {
-                        btn_Account.setText(account);
-                        String email = userSnapshot.child("email").getValue(String.class);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren())
+                    {
+                        userData userData = com.example.demo.userData.getInstance();
+                        String account = userSnapshot.child("name").getValue(String.class);
+                        if(userData.getAccount().equals(account)) {
+                            btn_Account.setText(account);
+                            String email = userSnapshot.child("email").getValue(String.class);
                         btn_Email.setText(email);
                         String username = userSnapshot.child("username").getValue(String.class);
                         btn_Username.setText(username);
                         String password = userSnapshot.child("password").getValue(String.class);
-                        btn_Password.setText(password);
+                        //btn_Password.setText(password);
+                        String star="";
+                        for(int i=0 ; i<password.length() ; i++){
+                            star+="*";
+                        }
+                        btn_Password.setText(star);
 
                         userData userData1 = com.example.demo.userData.getInstance();
                         userData1.setName(btn_Username.getText().toString());
@@ -137,6 +147,7 @@ public class setting extends AppCompatActivity {
 
                     HelperClass helperClass = new HelperClass(userData.getAccount(), userData.getEmail(), userData.getName(), userData.getPw());
                     reference.child(userData.getAccount()).setValue(helperClass);
+                    Toast.makeText(setting.this, "密碼更改成功", Toast.LENGTH_SHORT).show();
                 }
             });
             reset.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -182,6 +193,7 @@ public class setting extends AppCompatActivity {
 
                     HelperClass helperClass = new HelperClass(userData.getAccount(), userData.getEmail(), userData.getName(), userData.getPw());
                     reference.child(userData.getAccount()).setValue(helperClass);
+                    Toast.makeText(setting.this, "暱稱更改成功", Toast.LENGTH_SHORT).show();
                 }
             });
             reset.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -227,6 +239,7 @@ public class setting extends AppCompatActivity {
 
                     HelperClass helperClass = new HelperClass(userData.getAccount(), userData.getEmail(), userData.getName(), userData.getPw());
                     reference.child(userData.getAccount()).setValue(helperClass);
+                    Toast.makeText(setting.this, "Email更改成功", Toast.LENGTH_SHORT).show();
                 }
             });
             reset.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -238,5 +251,17 @@ public class setting extends AppCompatActivity {
             reset.show();
         }
     };
+    private void logout() {
+        // 清除登入狀態
+        SharedPreferences.Editor editor = getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(KEY_IS_LOGGED_IN, false);
+        editor.apply();
+    }
+    private void goToLoginActivity() {
+        // 跳轉到登入畫面
+        Intent intent = new Intent(this, start.class);
+        startActivity(intent);
+        finish(); // 結束主畫面，以防使用者回到該畫面
+    }
 }
 

@@ -2,6 +2,7 @@ package com.example.demo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
+import javax.net.ssl.SSLEngineResult;
+
 public class longing extends AppCompatActivity {
+    //SharedPreferences
+    private static final String PREFERENCE_FILE_NAME = "login_preferences";
+    private static final String KEY_IS_LOGGED_IN = "is_logged_in";
+    private static final String NAMEFILE = "namefile" ;
+    private static final String KEY_NAME = "keyname" ;
 
     EditText loginUsername,loginPassword;
     Button loginButton;
@@ -38,8 +46,8 @@ public class longing extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logining);
+        //status checked
 
-        //
         fragmentPerson = new FragmentPerson();//f
         //getSupportFragmentManager().beginTransaction().add(R.id.frameLayout,fragmentPerson,"A").commit();
         //顏色
@@ -61,7 +69,8 @@ public class longing extends AppCompatActivity {
                 if(!vaidateUsername() | !vaidatePassword()){
 
                 }else {
-                    checkUser(); //確認輸入的內容是否正確
+                    checkUser();
+                    //確認輸入的內容是否正確
                 }
             }
         });
@@ -98,7 +107,7 @@ public class longing extends AppCompatActivity {
     public void checkUser() {
         String userUsername = loginUsername.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
-
+        //db setting
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUserDatabase = reference.orderByChild("name").equalTo(userUsername);
 
@@ -118,22 +127,26 @@ public class longing extends AppCompatActivity {
                         //userData.setEmail(signupEmail.getText().toString());
                         userData.setAccount(userUsername);
 
-
                         Bundle bundle = new Bundle();
                         bundle.putString("name", userUsername);
                         Toast.makeText(longing.this, "登入成功!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(longing.this, nologin.class); // 將 CorrectLoginActivity 替換為實際的活動
                         intent.putExtras(bundle);
                         startActivity(intent);
-
                         finish();
+                        //saveStatus
+                        saveLoginState(true);
+                        saveName(userUsername);
+
                     } else {
                         loginPassword.setError("密碼錯誤");
                         loginPassword.requestFocus();
+
                     }
                 } else {
                     loginUsername.setError("使用者錯誤");
                     loginUsername.requestFocus();
+
                 }
             }
 
@@ -143,5 +156,20 @@ public class longing extends AppCompatActivity {
             }
         });
     }
+    //驗證登入狀態
+    private void saveLoginState(boolean isLoggedIn) {
+        // 將登入狀態儲存到 SharedPreferences 中
+        SharedPreferences.Editor editor = getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn);
+        editor.apply();
+    }
+    //---
+    private void saveName(String name) {
+        // 將登入狀態儲存到 SharedPreferences 中
+        SharedPreferences.Editor editor = getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE).edit();
+        editor.putString(KEY_NAME, name);
+        editor.apply();
+    }
+
 
 }
