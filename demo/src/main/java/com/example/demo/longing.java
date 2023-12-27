@@ -47,7 +47,7 @@ public class longing extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(longing.this, android.R.color.holo_orange_light));
-
+        //test
         //綁定
         loginUsername=findViewById(R.id.username);
         loginPassword=findViewById(R.id.password);
