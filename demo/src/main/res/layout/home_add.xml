@@ -9,22 +9,21 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="51dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="增加資料"
-            android:textColor="@color/white"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533"
-            android:textSize="20sp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgBack"
@@ -39,12 +38,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="請輸入需要增加的資料:"
-        android:layout_margin="10dp"
+        android:text="請輸入需要增加的餐點名稱:"
         android:textStyle="bold"
-        android:textSize="20sp"/>
+        android:textSize="18sp"
+        android:layout_margin="8dp"/>
+
 
 </LinearLayout>

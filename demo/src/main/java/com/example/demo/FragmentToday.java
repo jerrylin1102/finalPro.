@@ -61,13 +61,7 @@ public class FragmentToday extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_today, container, false);
-        Button btn = view.findViewById(R.id.button12);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(view.getContext(), "TEST", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         // Inflate the layout for this fragment
         return view;
     }
