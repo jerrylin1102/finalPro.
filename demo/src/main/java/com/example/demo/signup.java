@@ -141,7 +141,7 @@ public class signup extends AppCompatActivity {
                             Toast.makeText(signup.this, "註冊成功! ", Toast.LENGTH_SHORT).show();
                             Bundle bundle = new Bundle();
                             bundle.putString("name", account);
-                            Intent intent = new Intent(signup.this, nologin.class);
+                            Intent intent = new Intent(signup.this, longing.class);
 
                             intent.putExtras(bundle);
                             startActivity(intent);
