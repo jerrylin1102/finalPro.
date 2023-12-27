@@ -39,6 +39,7 @@ public class longing extends AppCompatActivity {
     EditText loginUsername,loginPassword;
     Button loginButton;
     TextView signupRedirecText;
+    ImageView imgback;
 
     private FragmentPerson fragmentPerson;//f
 
@@ -61,7 +62,13 @@ public class longing extends AppCompatActivity {
         loginPassword=findViewById(R.id.password);
         loginButton=findViewById(R.id.loginButton);
         signupRedirecText=findViewById(R.id.loginRedirecText);
-
+        imgback = findViewById(R.id.imgBack);
+        imgback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //按鍵觸發偵測
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,8 +143,8 @@ public class longing extends AppCompatActivity {
                         finish();
                         //saveStatus
                         saveLoginState(true);
-                        saveName(userUsername);
-
+                        saveAccount(userUsername);
+                        userData.setAccount(userUsername);
                     } else {
                         loginPassword.setError("密碼錯誤");
                         loginPassword.requestFocus();
@@ -164,10 +171,10 @@ public class longing extends AppCompatActivity {
         editor.apply();
     }
     //---
-    private void saveName(String name) {
+    private void saveAccount(String account) {
         // 將登入狀態儲存到 SharedPreferences 中
         SharedPreferences.Editor editor = getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE).edit();
-        editor.putString(KEY_NAME, name);
+        editor.putString(KEY_NAME, account);
         editor.apply();
     }
 

@@ -41,6 +41,8 @@ public class FragmentPerson extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String NAMEFILE = "namefile" ;
     private static final String KEY_NAME = "keyname" ;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference reference;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -78,6 +80,7 @@ public class FragmentPerson extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -88,22 +91,42 @@ public class FragmentPerson extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_person, container, false);
         final Context context=getActivity();
         Intent material=new Intent(context,material.class);
         Intent setting=new Intent(context,setting.class);
         personname = view.findViewById(R.id.personname);
 
-        /*HelperClass helperClass = new HelperClass(account, email, username, password);
-        reference.child(account).setValue(helperClass);*/
-        //---
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try{
+                    for (DataSnapshot userSnapshot : snapshot.getChildren())
+                    {
+                        userData userData = com.example.demo.userData.getInstance();
+                        String account = userSnapshot.child("name").getValue(String.class);;
+                        if(readUsername().equals(account)){
+                            String Username = userSnapshot.child("username").getValue(String.class);
+                            personname.setText(Username);
+                            Log.e("name:",Username);
+                        }
+                    }
+                }
+                catch (NullPointerException n){
+                    n.printStackTrace();
+                }
+            }
 
-        Intent intent = this.getActivity().getIntent();
-        String username=intent.getStringExtra("name");
-        //username =readUsername();
-        String savedUsername = readUsername();
-        //personname.setText(username);
-        personname.setText(savedUsername);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //
+
 
         ImageView imgSitting=view.findViewById(R.id.setting);
         ImageView imgmaterial=view.findViewById(R.id.material);
@@ -117,6 +140,7 @@ public class FragmentPerson extends Fragment {
             @Override
             public void onClick(View v) {
                 context.startActivity(setting);
+                getActivity().finish();
 
             }
         });
@@ -127,11 +151,12 @@ public class FragmentPerson extends Fragment {
     @Override//f
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-         TextView personname= (TextView) view.findViewById(R.id.personname);
+         //TextView personname= (TextView) view.findViewById(R.id.personname);
     }
     private String readUsername() {
         // 從 SharedPreferences 中檢索資料
         SharedPreferences preferences = getActivity().getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE);
         return preferences.getString(KEY_NAME, null);
     }
+
 }

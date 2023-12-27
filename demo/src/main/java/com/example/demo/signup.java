@@ -52,7 +52,7 @@ public class signup extends AppCompatActivity {
     public Boolean vaidateAccount(){
         String val=signupAccount.getText().toString();
         if(val.isEmpty()){
-            signupAccount.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            signupAccount.setError("Account cannot bt empty"); //跟你說不能沒有填東西
             return false;
         }else {
             signupAccount.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
@@ -62,7 +62,7 @@ public class signup extends AppCompatActivity {
     public Boolean vaidateEmail(){
         String val=signupEmail.getText().toString();
         if(val.isEmpty()){
-            signupEmail.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            signupEmail.setError("Email cannot bt empty"); //跟你說不能沒有填東西
             return false;
         }else {
             signupEmail.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
@@ -72,7 +72,7 @@ public class signup extends AppCompatActivity {
     public Boolean vaidatePassword(){
         String val=signupPassword.getText().toString();
         if(val.isEmpty()){
-            signupPassword.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            signupPassword.setError("Passwoed cannot bt empty"); //跟你說不能沒有填東西
             return false;
         }else {
             signupPassword.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息

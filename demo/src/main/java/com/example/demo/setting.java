@@ -33,6 +33,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.jar.Attributes;
+import com.example.demo.FragmentPerson;
+
 
 public class setting extends AppCompatActivity {
     private ImageView imgBack;
@@ -118,7 +120,14 @@ public class setting extends AppCompatActivity {
     private View.OnClickListener lis = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            /*Intent intent = new Intent(setting.this,nologin.class);
+            startActivity(intent);
+            finish();*/
+            Intent intent = new Intent(setting.this, nologin.class);
+            intent.putExtra("selectedFragment", 2); // 將選擇的 Fragment 索引傳遞給 nologin Activity
+            startActivity(intent);
             finish();
+
         }
     };
 

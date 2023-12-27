@@ -56,15 +56,14 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="40dp"
                 android:background="@drawable/custome"
                 android:drawableLeft="@drawable/person"
                 android:drawablePadding="8dp"
+                android:hint="Account"
                 android:padding="8dp"
-                android:hint="Username"
                 android:textColor="@color/black"
-                android:textColorHighlight="@color/cardview_dark_background"
-                android:layout_marginTop="40dp"
-                />
+                android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
                 android:id="@+id/password"

@@ -55,7 +55,18 @@ public class nologin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nologin);
+        //switch page
+        viewPager2 = findViewById(R.id.viewPage);
+        Intent intent01 = getIntent();
+        if (intent01 != null && intent01.getExtras() != null) {
+            Bundle extras = intent01.getExtras();
+            int selectedFragmentIndex = extras.getInt("selectedFragment", 0);
 
+            // 切換到指定索引的 Fragment
+            viewPager2.setCurrentItem(selectedFragmentIndex);
+        }
+
+        //
         Window window=nologin.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
