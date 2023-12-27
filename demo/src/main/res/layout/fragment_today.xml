@@ -6,26 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FragmentToday"
-    android:background="@drawable/img_3">
+    android:background="@drawable/img_3"
 
-    <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
+
+    >
+
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="411dp"
+        android:layout_height="450dp"
+        app:eventsEnabled="true"
+        app:headerColor="#FFBB33"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button12" />
-
-    <Button
-        android:id="@+id/button12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:selectionColor="#FF9800"
+        app:selectionLabelColor="#FFFFFF"
+        app:todayLabelColor="#FF9800"
+        app:type="one_day_picker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
