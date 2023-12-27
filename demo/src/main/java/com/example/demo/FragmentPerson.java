@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,8 @@ public class FragmentPerson extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String NAMEFILE = "namefile" ;
+    private static final String KEY_NAME = "keyname" ;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -97,7 +100,10 @@ public class FragmentPerson extends Fragment {
 
         Intent intent = this.getActivity().getIntent();
         String username=intent.getStringExtra("name");
-        personname.setText(username);
+        //username =readUsername();
+        String savedUsername = readUsername();
+        //personname.setText(username);
+        personname.setText(savedUsername);
 
         ImageView imgSitting=view.findViewById(R.id.setting);
         ImageView imgmaterial=view.findViewById(R.id.material);
@@ -122,5 +128,10 @@ public class FragmentPerson extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
          TextView personname= (TextView) view.findViewById(R.id.personname);
+    }
+    private String readUsername() {
+        // 從 SharedPreferences 中檢索資料
+        SharedPreferences preferences = getActivity().getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE);
+        return preferences.getString(KEY_NAME, null);
     }
 }

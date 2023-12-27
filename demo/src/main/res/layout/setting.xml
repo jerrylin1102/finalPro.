@@ -136,6 +136,16 @@
                 android:textSize="20dp"
                 android:gravity="left|center_vertical"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登出"
+            android:textColorHighlight="#FF9800"
+            android:textColorLink="#FF9800"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/FF"/>
     </LinearLayout>
 
 </LinearLayout>

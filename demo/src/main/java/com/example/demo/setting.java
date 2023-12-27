@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import android.accounts.Account;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -35,7 +36,7 @@ import java.util.jar.Attributes;
 
 public class setting extends AppCompatActivity {
     private ImageView imgBack;
-    private Button btn_Account, btn_Password, btn_Username, btn_Email;
+    private Button btn_Account, btn_Password, btn_Username, btn_Email,btn_logout;
     FragmentManager fragmentManager = getFragmentManager();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
@@ -43,6 +44,7 @@ public class setting extends AppCompatActivity {
     private static final String PREFERENCE_FILE_NAME = "login_preferences";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class setting extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(setting.this, android.R.color.holo_orange_light));
-
+        btn_logout = this.findViewById(R.id.btn_logout);
         btn_Account = findViewById(R.id.btn_Account);
         btn_Username = findViewById(R.id.btn_Username);
         btn_Password = findViewById(R.id.btn_Password);
@@ -65,6 +67,7 @@ public class setting extends AppCompatActivity {
         btn_Email.setOnClickListener(emaillistener);
         btn_Username.setOnClickListener(usernamelistener);
         btn_Password.setOnClickListener(passwordlistener);
+        btn_logout.setOnClickListener(logoutlistener);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("users");
@@ -72,31 +75,36 @@ public class setting extends AppCompatActivity {
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot userSnapshot : snapshot.getChildren())
-                    {
-                        userData userData = com.example.demo.userData.getInstance();
-                        String account = userSnapshot.child("name").getValue(String.class);
-                        if(userData.getAccount().equals(account)) {
-                            btn_Account.setText(account);
-                            String email = userSnapshot.child("email").getValue(String.class);
-                        btn_Email.setText(email);
-                        String username = userSnapshot.child("username").getValue(String.class);
-                        btn_Username.setText(username);
-                        String password = userSnapshot.child("password").getValue(String.class);
-                        //btn_Password.setText(password);
-                        String star="";
-                        for(int i=0 ; i<password.length() ; i++){
-                            star+="*";
-                        }
-                        btn_Password.setText(star);
+                    try{
+                        for (DataSnapshot userSnapshot : snapshot.getChildren())
+                        {
+                            userData userData = com.example.demo.userData.getInstance();
+                            String account = userSnapshot.child("name").getValue(String.class);
+                            if(userData.getAccount().equals(account)) {
+                                btn_Account.setText(account);
+                                String email = userSnapshot.child("email").getValue(String.class);
+                                btn_Email.setText(email);
+                                String username = userSnapshot.child("username").getValue(String.class);
+                                btn_Username.setText(username);
+                                String password = userSnapshot.child("password").getValue(String.class);
+                                //btn_Password.setText(password);
+                                String star="";
+                                for(int i=0 ; i<password.length() ; i++){
+                                    star+="*";
+                                }
+                                btn_Password.setText(star);
 
-                        userData userData1 = com.example.demo.userData.getInstance();
-                        userData1.setName(btn_Username.getText().toString());
-                        userData1.setEmail(btn_Email.getText().toString());
-                        userData1.setAccount(btn_Account.getText().toString());
-                        userData1.setPw(btn_Password.getText().toString());
+                                userData userData1 = com.example.demo.userData.getInstance();
+                                userData1.setName(btn_Username.getText().toString());
+                                userData1.setEmail(btn_Email.getText().toString());
+                                userData1.setAccount(btn_Account.getText().toString());
+                                userData1.setPw(btn_Password.getText().toString());
+                            }
+                        }
                     }
-                }
+                    catch (NullPointerException n){
+                        n.printStackTrace();
+                    }
             }
 
             @Override
@@ -251,11 +259,21 @@ public class setting extends AppCompatActivity {
             reset.show();
         }
     };
+    private View.OnClickListener logoutlistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            logout();
+            finish();
+        }
+    };
     private void logout() {
         // 清除登入狀態
         SharedPreferences.Editor editor = getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE).edit();
         editor.putBoolean(KEY_IS_LOGGED_IN, false);
         editor.apply();
+        finish();
+        goToLoginActivity();
+
     }
     private void goToLoginActivity() {
         // 跳轉到登入畫面
