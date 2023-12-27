@@ -1,24 +1,41 @@
 package com.example.demo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class start extends AppCompatActivity {
     private Button start;
+    private static final String PREFERENCE_FILE_NAME = "login_preferences";
+    private static final String KEY_IS_LOGGED_IN = "is_logged_in";
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start);
-
+        //firebase
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference("users");
 
         //顏色
         Window window= com.example.demo.start.this.getWindow();
@@ -32,7 +49,15 @@ public class start extends AppCompatActivity {
     private View.OnClickListener lis=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            showAlerDialog();
+
+            if (isLoggedIn()) {
+                // 如果已經登入，跳轉到主畫面
+                Toast.makeText(start.this, "歡迎回來", Toast.LENGTH_SHORT).show();
+                goToMainActivity();
+                finish();
+            } else {
+                showAlerDialog();
+            }
         }
     };
     private void showAlerDialog(){
@@ -52,13 +77,14 @@ public class start extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startActivity(logining);
+                        finish();
 
                     }
                 })
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(nologin);
+                        //startActivity(nologin);
 
                     }
                 })
@@ -66,4 +92,24 @@ public class start extends AppCompatActivity {
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.iconcolor));
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.iconcolor));
     }
+    private boolean isLoggedIn() {
+        // 從 SharedPreferences 中檢查登入狀態
+        SharedPreferences preferences = getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean(KEY_IS_LOGGED_IN, false);
+    }
+
+    private void saveLoginState(boolean isLoggedIn) {
+        // 將登入狀態儲存到 SharedPreferences 中
+        SharedPreferences.Editor editor = getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE).edit();
+        editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn);
+        editor.apply();
+    }
+
+    private void goToMainActivity() {
+        // 跳轉到主畫面
+        Intent intent = new Intent(this,nologin.class);
+        startActivity(intent);
+        finish(); // 結束登入畫面，以防使用者回到該畫面
+    }
+
 }

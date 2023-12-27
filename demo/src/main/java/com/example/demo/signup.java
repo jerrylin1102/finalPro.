@@ -47,6 +47,7 @@ public class signup extends AppCompatActivity {
 
         signupButton.setOnClickListener(signup);
         loginRedirecText.setOnClickListener(loginR);
+
     }
     public Boolean vaidateAccount(){
         String val=signupAccount.getText().toString();
