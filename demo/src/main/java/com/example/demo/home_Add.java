@@ -2,6 +2,7 @@ package com.example.demo;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -58,15 +59,20 @@ public class home_Add extends AppCompatActivity {
             int year=datePicker.getYear(); //取得年份
             int month=(datePicker.getMonth())+1; //取得月份，因為從0開始所以要+1
             int day=datePicker.getDayOfMonth(); //取得日(Day)
-            String Date=String.valueOf(year)+"/"+String.valueOf(month)+String.valueOf(day);
+            String Date=String.valueOf(year)+String.valueOf(month)+String.valueOf(day);
             Toast.makeText(home_Add.this, year+"年"+month+"月"+day+"日新增了"+food, Toast.LENGTH_SHORT).show();
+
+
+            String dateString= String.format(Date);
 
             //以下為把資料輸進database
             database=FirebaseDatabase.getInstance();
             reference=database.getReference("diet");
             DatabaseReference reference1=FirebaseDatabase.getInstance().getReference("diet");
+
             FoodData foodData=new FoodData(Date,food);
-            reference1.child(Date).setValue(foodData);
+            Log.d("FoodData", foodData.toString());
+            reference1.child(dateString).push().setValue(foodData);
         }
     };
 }

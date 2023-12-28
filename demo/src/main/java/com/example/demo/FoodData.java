@@ -1,14 +1,14 @@
 package com.example.demo;
 
 public class FoodData {
-   String Date,food;
+   String date,food;
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        date = date;
     }
 
     public String getFood() {
@@ -20,10 +20,18 @@ public class FoodData {
     }
 
     public FoodData(String date, String food) {
-        Date = date;
+        date = date;
         this.food = food;
     }
 
     public FoodData() {
     }
+    @Override
+    public String toString() {
+        return "FoodData{" +
+                "date='" + date + '\'' +
+                ", food='" + food + '\'' +
+                '}';
+    }
+
 }

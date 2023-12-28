@@ -29,6 +29,7 @@
             <activity android:name=".diet_inspection" android:label="home_inspection"/>
 
 
+
     </application>
 
 

@@ -61,12 +61,24 @@
         android:layout_marginTop="10dp"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSearch"
         android:layout_width="114dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/FF"
         android:text="搜索" />
+
+    <TextView
+        android:id="@+id/show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <ListView
+        android:id="@+id/show_Food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
