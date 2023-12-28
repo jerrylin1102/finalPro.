@@ -11,8 +11,8 @@
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="411dp"
-        android:layout_height="450dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
         app:eventsEnabled="true"
         app:expanded="true"

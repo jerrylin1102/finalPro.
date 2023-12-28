@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="減少資料"
+            android:text="刪除資料"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/remove"
             app:layout_constraintStart_toStartOf="@+id/remove"

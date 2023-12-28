@@ -47,7 +47,7 @@ public class FragmentPerson extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private ImageView icon;
     private TextView personname;
     public FragmentPerson() {
         // Required empty public constructor
@@ -97,7 +97,7 @@ public class FragmentPerson extends Fragment {
         Intent material=new Intent(context,material.class);
         Intent setting=new Intent(context,setting.class);
         personname = view.findViewById(R.id.personname);
-
+        icon = view.findViewById(R.id.icon);
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("users");
         reference.addValueEventListener(new ValueEventListener() {

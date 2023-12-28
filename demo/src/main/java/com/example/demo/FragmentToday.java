@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.util.Calendar;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentToday#newInstance} factory method to
@@ -58,23 +61,35 @@ public class FragmentToday extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_today, container, false);
+        com.applandeo.materialcalendarview.CalendarView calendarView = view.findViewById(R.id.calendarView);
 
+        // 设置当前日期
+        Calendar currentCalendar = Calendar.getInstance();
+        long currentTimeMillis = System.currentTimeMillis();
+        // 將毫秒級別的時間轉換為 Date 對象
+        Date currentDate = new Date(currentTimeMillis);
 
+        calendarView.setOnDayClickListener(new com.applandeo.materialcalendarview.listeners.OnDayClickListener() {
+            @Override
+            public void onDayClick(com.applandeo.materialcalendarview.EventDay eventDay) {
+                Calendar clickedDayCalendar = eventDay.getCalendar();
+                // 獲取選擇的日期
+                Date selectedDate = new Date(clickedDayCalendar.getTimeInMillis());
 
+                // 在這裡處理選擇的日期
+                // 例如，顯示一個 Toast
+                Toast.makeText(getContext(), "選擇的日期：" + selectedDate.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
-
-
-
-
-
-
-        // Inflate the layout for this fragment
         return view;
     }
+
 }
