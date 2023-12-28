@@ -3,13 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/img_3"
-    tools:context=".FragmentToday"
-
-
-    >
+    tools:context=".FragmentToday">
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarView"
@@ -17,6 +15,7 @@
         android:layout_height="450dp"
         app:eventsEnabled="true"
         app:headerColor="#FFBB33"
+        app:expanded="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,5 +24,6 @@
         app:selectionLabelColor="#FFFFFF"
         app:todayLabelColor="#FF9800"
         app:type="one_day_picker" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

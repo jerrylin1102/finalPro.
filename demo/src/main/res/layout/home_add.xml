@@ -36,14 +36,29 @@
             app:srcCompat="@drawable/keyboard_backspace" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/text5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:text="請確認日期"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        />
 
     <DatePicker
+        android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:datePickerMode="spinner"
-        android:layout_gravity="center"
+        android:background="@drawable/custome"
         android:calendarViewShown="false"
-        />
+        android:datePickerMode="spinner"
+        android:spinnersShown="true"
+        android:theme="@style/Theme.picker"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
 
 
     <TextView
@@ -55,23 +70,22 @@
         android:text="請輸入需要增加的餐點名稱"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_marginTop="15dp"
         />
-
-
-
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/edtFood"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_margin="10dp"
-
         android:background="@drawable/custome"
         android:ems="10"
         android:inputType="text"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:padding="12dp"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnAddClick"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

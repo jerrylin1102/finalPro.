@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="Theme.picker" parent="Theme.AppCompat.Light">
+        <!--分割线颜色-->
+        <item name="colorControlNormal">#FFBB00</item>
+        <item name="android:editTextStyle">@style/Widget.EditText.White</item>
+    </style>
+    <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
+        <!--文字颜色-->
+        <item name="android:textColor">@color/iconcolor</item>
+    </style>
+
+
+</resources>
