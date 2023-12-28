@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import static android.app.PendingIntent.getActivity;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -10,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,6 +29,8 @@ public class start extends AppCompatActivity {
     private Button start;
     private static final String PREFERENCE_FILE_NAME = "login_preferences";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
+    private static final String NAMEFILE = "namefile" ;
+    private static final String KEY_NAME = "keyname" ;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
 
@@ -36,7 +41,15 @@ public class start extends AppCompatActivity {
         //firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("users");
-
+        //save account
+        userData userData = com.example.demo.userData.getInstance();
+        userData.setAccount(readAccount());
+        //bundle
+        /*Bundle bundle = new Bundle();
+        bundle.putString("name", readAccount());
+        Intent intent = new Intent(this,setting.class);
+        intent.putExtras(bundle);
+        startActivity(intent);*/
         //顏色
         Window window= com.example.demo.start.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -55,6 +68,7 @@ public class start extends AppCompatActivity {
                 Toast.makeText(start.this, "歡迎回來", Toast.LENGTH_SHORT).show();
                 goToMainActivity();
                 finish();
+                Log.e("-->",readAccount()+"---");
             } else {
                 showAlerDialog();
             }
@@ -97,19 +111,22 @@ public class start extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE);
         return preferences.getBoolean(KEY_IS_LOGGED_IN, false);
     }
-
-    private void saveLoginState(boolean isLoggedIn) {
-        // 將登入狀態儲存到 SharedPreferences 中
-        SharedPreferences.Editor editor = getSharedPreferences(PREFERENCE_FILE_NAME, Context.MODE_PRIVATE).edit();
-        editor.putBoolean(KEY_IS_LOGGED_IN, isLoggedIn);
-        editor.apply();
-    }
-
     private void goToMainActivity() {
         // 跳轉到主畫面
         Intent intent = new Intent(this,nologin.class);
         startActivity(intent);
         finish(); // 結束登入畫面，以防使用者回到該畫面
+    }
+    private void saveAccount(String account) {
+        // 將登入狀態儲存到 SharedPreferences 中
+        SharedPreferences.Editor editor = getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE).edit();
+        editor.putString(KEY_NAME, account);
+        editor.apply();
+    }
+    private String readAccount() {
+        // 從 SharedPreferences 中檢索資料
+        SharedPreferences preferences = getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE);
+        return preferences.getString(KEY_NAME, null);
     }
 
 }

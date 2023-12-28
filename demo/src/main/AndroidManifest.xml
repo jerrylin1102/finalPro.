@@ -3,9 +3,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/icon01"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/icon"
+        android:roundIcon="@mipmap/icon01"
         android:supportsRtl="true"
         android:theme="@style/Theme.DEMO">
         <activity
@@ -27,6 +27,7 @@
             <activity android:name=".home_Remove" android:label="home_Remove"/>
             <activity android:name=".home_help" android:label="home_help"/>
             <activity android:name=".diet_inspection" android:label="home_inspection"/>
+
 
     </application>
 
