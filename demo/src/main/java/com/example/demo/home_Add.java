@@ -43,6 +43,10 @@ public class home_Add extends AppCompatActivity {
         datePicker=findViewById(R.id.datePicker);
 
         btnClick.setOnClickListener(btnClk);
+        String account="";
+        userData userData1 = com.example.demo.userData.getInstance();
+        account=userData1.getAccount();
+        //this is account
 
     }
     private View.OnClickListener lis=new View.OnClickListener() {
