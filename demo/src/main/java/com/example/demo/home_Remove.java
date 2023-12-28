@@ -32,7 +32,6 @@ public class home_Remove extends AppCompatActivity {
     private DatePicker datePicker;
     private ListView show_Food;
     private Button search;
-    private TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class home_Remove extends AppCompatActivity {
         show_Food=findViewById(R.id.show_Food);
         datePicker=findViewById(R.id.datePicker);
         search=findViewById(R.id.btnSearch);
-        text=findViewById(R.id.show);
 
         search.setOnClickListener(Sea);
 
@@ -72,30 +70,33 @@ public class home_Remove extends AppCompatActivity {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.d("Firebase", "DataSnapshot: " + snapshot.toString());
                     List<String> foodList = new ArrayList<>();
+                    //輪一次資料
                     for (DataSnapshot foodSnapshot : snapshot.getChildren()) {
-                        FoodData foodData = foodSnapshot.getValue(FoodData.class);
-                        Log.d("Firebase", "FoodSnapshot: " + foodSnapshot);
-                        Log.d("Firebase", "FoodData: " + foodData);
-                        if (foodData.getFood() != null && foodData.getDate() != null && foodData.getDate().equals(selectedDate)) {
-                            String food = foodData.getFood();
-                            Log.d("food","food:"+food);
-                            foodList.add(food);
+                        //檢查資料日期是否為seletedDate
+                        if (foodSnapshot.getKey().equals(selectedDate)){
+                            //把資料抓出來並加入foodList
+                            for (DataSnapshot foods : foodSnapshot.getChildren()){
+                                FoodData foodData = foods.getValue(FoodData.class);
+                                foodList.add(foodData.food);
+                            }
                         }
                     }
-                    Log.d("foodList","foodList:"+foodList);
+                    ArrayAdapter<String> adapter=new ArrayAdapter<String>(home_Remove.this, android.R.layout.simple_list_item_1, foodList);
+
                     // 將 foodList 的內容顯示在 TextView 中
                     if (!foodList.isEmpty()) {
                         Log.d("Firebase", "Food List: " + foodList.toString());
                         String foods = TextUtils.join(", ", foodList);
                         // 使用您的 TextView 顯示文字，確保在主線程上執行
-                        runOnUiThread(() -> text.setText(foods));
+                        runOnUiThread(() -> show_Food.setAdapter(adapter));
+
                     } else {
-                        runOnUiThread(() -> text.setText(selectedDate + " No food for selected date"));
+                        runOnUiThread(() -> show_Food.setAdapter(adapter));
+                        Toast.makeText(home_Remove.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();
+                        //runOnUiThread(() -> text.setText(selectedDate + " No food for selected date"));
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     handleDatabaseError(error);

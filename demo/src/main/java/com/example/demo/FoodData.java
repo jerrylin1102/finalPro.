@@ -20,7 +20,7 @@ public class FoodData {
     }
 
     public FoodData(String date, String food) {
-        date = date;
+        this.date = date.toString();
         this.food = food;
     }
 

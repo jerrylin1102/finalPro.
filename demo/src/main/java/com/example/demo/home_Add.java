@@ -71,7 +71,7 @@ public class home_Add extends AppCompatActivity {
             DatabaseReference reference1=FirebaseDatabase.getInstance().getReference("diet");
 
             FoodData foodData=new FoodData(Date,food);
-            Log.d("FoodData", foodData.toString());
+            Log.d("FoodData", dateString);
             reference1.child(dateString).push().setValue(foodData);
         }
     };
