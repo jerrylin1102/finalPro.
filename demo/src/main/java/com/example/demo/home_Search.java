@@ -16,7 +16,7 @@ public class home_Search extends AppCompatActivity {
     private ImageView imgBack;
     private TextView show;
     private Button btnAddClick;
-    String entertext="說中文";
+    String entertext="說中文";//發送給gpt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
