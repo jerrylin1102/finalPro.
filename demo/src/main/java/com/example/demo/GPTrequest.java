@@ -10,7 +10,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GPTrequest {
-    public static final String OPENAI_API_KEY = "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";
+    public static final String OPENAI_API_KEY = "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";
     public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/text-davinci-003/completions";
 
     public static String sendChatRequest(String userInput) {
