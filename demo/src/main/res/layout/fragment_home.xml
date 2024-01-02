@@ -38,10 +38,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="324dp"
-        android:layout_height="179dp"
+        android:layout_width="358dp"
+        android:layout_height="198dp"
         android:layout_gravity="center"
-        android:src="@drawable/flout" />
+        android:src="@drawable/photo" />
 
     <Button
         android:id="@+id/button"
