@@ -20,7 +20,7 @@ public class GPTrequest {
 
         String s =userInput ;
         int maxTokens = 500;
-        double temperature = 1.0;
+        double temperature = 0.1;
 
         JSONObject jsonInputObject = new JSONObject();
 
