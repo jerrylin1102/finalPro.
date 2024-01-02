@@ -159,6 +159,7 @@ public class setting extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String newPassword = input.getText().toString();
                     userData userData = com.example.demo.userData.getInstance();
+                    //把資料存進userData裡面，再利用出來
                     userData.setPw(newPassword);
                     btn_Password.setText(userData.getPw());
 

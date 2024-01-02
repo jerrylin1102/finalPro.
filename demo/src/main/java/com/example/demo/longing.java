@@ -36,6 +36,9 @@ public class longing extends AppCompatActivity {
     private static final String NAMEFILE = "namefile" ;
     private static final String KEY_NAME = "keyname" ;
 
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     EditText loginUsername,loginPassword;
     Button loginButton;
     TextView signupRedirecText;
@@ -177,6 +180,8 @@ public class longing extends AppCompatActivity {
         editor.putString(KEY_NAME, account);
         editor.apply();
     }
+
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.example.demo;
 
 public class userData {
+    //公有儲存空間
     private static userData instance;
 
     private String name;
