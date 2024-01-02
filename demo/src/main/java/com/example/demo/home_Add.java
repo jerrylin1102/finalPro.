@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -23,8 +25,12 @@ public class home_Add extends AppCompatActivity {
     private EditText eatFood;
     private Button btnClick;
     private DatePicker datePicker;
+    private static final String NAMEFILE = "namefile" ;
+    private static final String KEY_NAME = "keyname" ;
     FirebaseDatabase database;
     DatabaseReference reference;
+    String account;
+    int sum=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +49,7 @@ public class home_Add extends AppCompatActivity {
         datePicker=findViewById(R.id.datePicker);
 
         btnClick.setOnClickListener(btnClk);
-        String account="";
+
         userData userData1 = com.example.demo.userData.getInstance();
         account=userData1.getAccount();
         //this is account
@@ -59,6 +65,7 @@ public class home_Add extends AppCompatActivity {
     private View.OnClickListener btnClk=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Log.d("account=","account="+account);
             String food=eatFood.getText().toString(); //取得食物名稱
             int year=datePicker.getYear(); //取得年份
             int month=(datePicker.getMonth())+1; //取得月份，因為從0開始所以要+1
@@ -71,12 +78,21 @@ public class home_Add extends AppCompatActivity {
 
             //以下為把資料輸進database
             database=FirebaseDatabase.getInstance();
-            reference=database.getReference("diet");
-            DatabaseReference reference1=FirebaseDatabase.getInstance().getReference("diet");
+            reference=database.getReference(account);
+            DatabaseReference reference1=FirebaseDatabase.getInstance().getReference(account);
 
             FoodData foodData=new FoodData(Date,food);
             Log.d("FoodData", dateString);
             reference1.child(dateString).push().setValue(foodData);
         }
     };
+    private String readAccount() {
+        // 從 SharedPreferences 中檢索資料
+        SharedPreferences preferences = getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE);
+        return preferences.getString(KEY_NAME, null);
+    }
+    private Integer num(){
+        sum++;
+        return sum;
+    }
 }
