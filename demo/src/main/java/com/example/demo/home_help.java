@@ -14,7 +14,7 @@ public class home_help extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_search);
+        setContentView(R.layout.home_help);
 
         //顏色
         Window window=home_help.this.getWindow();
@@ -29,7 +29,6 @@ public class home_help extends AppCompatActivity {
     private View.OnClickListener lis=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
             finish();
         }
     };

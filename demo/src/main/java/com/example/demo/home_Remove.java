@@ -71,6 +71,7 @@ public class home_Remove extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String showfood = parent.getItemAtPosition(position).toString();
+            Log.e("Data", showfood);
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(account);
 
             // 獲取所選項目對應的 Firebase 資料的 key
@@ -87,7 +88,7 @@ public class home_Remove extends AppCompatActivity {
                     for (DataSnapshot foodSnapshot : snapshot.getChildren()) {
                         if (foodSnapshot.getKey().equals(selectedDate)) {
                             for (DataSnapshot foods : foodSnapshot.getChildren()) {
-                                Log.e("Data", foods.toString());
+                                //Log.e("Data", foods.toString());
                                 FoodData foodData = foods.getValue(FoodData.class);
                                 if (foodData.food.equals(showfood)) {
                                     keyToRemove[0] = foods.getKey();
@@ -109,8 +110,9 @@ public class home_Remove extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         databaseReference.child(selectedDate).child(keyToRemove[0]).removeValue();
                                         if (position >= 0 && position < foodList.size()) {
-                                            Log.e("DataFood", foodList.toString());
+                                            //Log.e("DataFood", foodList.toString());
                                             foodList.remove(position);
+                                            Log.e("Data", foodList.toString());
                                             runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
@@ -153,6 +155,7 @@ public class home_Remove extends AppCompatActivity {
     private View.OnClickListener Sea=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            //Log.e("Data", "按鈕被按下了");
             int year = datePicker.getYear();
             int month = datePicker.getMonth() + 1;
             int day = datePicker.getDayOfMonth();
@@ -160,12 +163,13 @@ public class home_Remove extends AppCompatActivity {
             //List<String> foodList = new ArrayList<>();
             String selectedDate = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(account);
-            Log.d("Firebase", "Adding ValueEventListener");
+            //Log.d("Firebase", "Adding ValueEventListener");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     //輪一次資料
                     for (DataSnapshot foodSnapshot : snapshot.getChildren()) {
+                        //Log.e("Data", selectedDate);
                         //檢查資料日期是否為seletedDate
                         if (foodSnapshot.getKey().equals(selectedDate)){
                             foodList.clear();
@@ -177,18 +181,19 @@ public class home_Remove extends AppCompatActivity {
                             }
                         }
                     }
+                    //Log.d("Firebase", "Food List: " + foodList.toString());
                    // ArrayAdapter<String> adapter=new ArrayAdapter<String>(home_Remove.this, android.R.layout.simple_list_item_1, foodList);
 
                     // 將 foodList 的內容顯示在 TextView 中
                     if (!foodList.isEmpty()) {
-                        Log.d("Firebase", "Food List: " + foodList.toString());
+                        //Log.d("Firebase", "Food List: " + "有東西!");
                         String foods = TextUtils.join(", ", foodList);
                         // 使用您的 TextView 顯示文字，確保在主線程上執行
 
                         runOnUiThread(() -> show_Food.setAdapter(adapter));
 
                     } else {
-
+                        //Log.d("Firebase", "Food List: " + "沒ul4t8東西!");
                         runOnUiThread(() -> show_Food.setAdapter(adapter));
                         Toast.makeText(home_Remove.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();
                         //runOnUiThread(() -> text.setText(selectedDate + " No food for selected date"));
@@ -201,10 +206,10 @@ public class home_Remove extends AppCompatActivity {
             });
         }
     };
+    //返回按鈕
     private View.OnClickListener lis=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
             finish();
         }
     };
