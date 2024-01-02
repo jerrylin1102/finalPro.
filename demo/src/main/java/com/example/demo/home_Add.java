@@ -82,7 +82,7 @@ public class home_Add extends AppCompatActivity {
             {d=String.valueOf(day);}
             String Date=String.valueOf(year)+"-"+m+"-"+d;
             Toast.makeText(home_Add.this, Date+"新增了"+food, Toast.LENGTH_SHORT).show();
-
+            eatFood.setText("");
 
             String dateString= String.format(Date);
 
