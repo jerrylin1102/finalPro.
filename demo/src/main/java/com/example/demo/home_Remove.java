@@ -145,25 +145,42 @@ public class home_Remove extends AppCompatActivity {
 
         // 用於獲取選擇的日期
         private String getSelectedDate() {
+            String m;
+            String d;
             int year = datePicker.getYear();
             int month = datePicker.getMonth() + 1;
+            if(month<10)
+            {m="0"+String.valueOf(month);}
+            else
+            {m=String.valueOf(month);}
             int day = datePicker.getDayOfMonth();
-            return String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
+            if(day<10)
+            {d="0"+String.valueOf(day);}
+            else
+            {d=String.valueOf(day);}
+            return String.valueOf(year)+"-"+m+"-"+d;
         }
     };
 
     private View.OnClickListener Sea=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //Log.e("Data", "按鈕被按下了");
-            int year = datePicker.getYear();
-            int month = datePicker.getMonth() + 1;
-            int day = datePicker.getDayOfMonth();
+            String m;
+            String d;
+            int year=datePicker.getYear(); //取得年份
+            int month=(datePicker.getMonth())+1; //取得月份，因為從0開始所以要+1
+            if(month<10)
+            {m="0"+String.valueOf(month);}
+            else
+            {m=String.valueOf(month);}
+            int day=datePicker.getDayOfMonth(); //取得日(Day)
+            if(day<10)
+            {d="0"+String.valueOf(day);}
+            else
+            {d=String.valueOf(day);}
+            String selectedDate=String.valueOf(year)+"-"+m+"-"+d;
             foodList.clear();
-            //List<String> foodList = new ArrayList<>();
-            String selectedDate = String.valueOf(year) + String.valueOf(month) + String.valueOf(day);
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(account);
-            //Log.d("Firebase", "Adding ValueEventListener");
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -213,6 +230,7 @@ public class home_Remove extends AppCompatActivity {
             finish();
         }
     };
+
     private void handleDatabaseError(DatabaseError databaseError) {
         Log.e("Firebase", "Read data failed:" + databaseError.toException().getMessage());
     }

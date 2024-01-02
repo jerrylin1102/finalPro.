@@ -11,11 +11,13 @@ import androidx.core.content.ContextCompat;
 
 public class home_Search extends AppCompatActivity {
     private ImageView imgBack;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_search);
-
         //顏色
         Window window=home_Search.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

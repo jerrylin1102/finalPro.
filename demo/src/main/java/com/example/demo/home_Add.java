@@ -66,12 +66,22 @@ public class home_Add extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             Log.d("account=","account="+account);
+            String m;
+            String d;
             String food=eatFood.getText().toString(); //取得食物名稱
             int year=datePicker.getYear(); //取得年份
             int month=(datePicker.getMonth())+1; //取得月份，因為從0開始所以要+1
+            if(month<10)
+            {m="0"+String.valueOf(month);}
+            else
+            {m=String.valueOf(month);}
             int day=datePicker.getDayOfMonth(); //取得日(Day)
-            String Date=String.valueOf(year)+String.valueOf(month)+String.valueOf(day);
-            Toast.makeText(home_Add.this, year+"年"+month+"月"+day+"日新增了"+food, Toast.LENGTH_SHORT).show();
+            if(day<10)
+            {d="0"+String.valueOf(day);}
+            else
+            {d=String.valueOf(day);}
+            String Date=String.valueOf(year)+"-"+m+"-"+d;
+            Toast.makeText(home_Add.this, Date+"新增了"+food, Toast.LENGTH_SHORT).show();
 
 
             String dateString= String.format(Date);
