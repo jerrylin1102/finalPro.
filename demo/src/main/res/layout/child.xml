@@ -8,6 +8,6 @@
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="10dp"
-        android:textSize="12dp"
+        android:textSize="18dp"
         android:paddingBottom="10dp" />
 </RelativeLayout>
