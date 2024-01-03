@@ -41,6 +41,7 @@ public class FragmentPerson extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private static final String NAMEFILE = "namefile" ;
     private static final String KEY_NAME = "keyname" ;
+    private int currentImageIndex = 1;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
 
@@ -143,6 +144,12 @@ public class FragmentPerson extends Fragment {
 
             }
         });
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchImage();
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
@@ -157,5 +164,21 @@ public class FragmentPerson extends Fragment {
         SharedPreferences preferences = getActivity().getSharedPreferences(NAMEFILE, Context.MODE_PRIVATE);
         return preferences.getString(KEY_NAME, null);
     }
-
+    private void switchImage() {
+        // 根據當前索引更換圖片
+        switch (currentImageIndex) {
+            case 1:
+                icon.setImageResource(R.mipmap.icon02);
+                currentImageIndex = 2;
+                break;
+            case 2:
+                icon.setImageResource(R.mipmap.icon03);
+                currentImageIndex = 3;
+                break;
+            case 3:
+                icon.setImageResource(R.mipmap.icon01);
+                currentImageIndex = 1;
+                break;
+        }
+    }
 }

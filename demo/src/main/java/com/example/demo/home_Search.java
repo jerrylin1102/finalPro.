@@ -109,7 +109,6 @@ public class home_Search extends AppCompatActivity {
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(false);
             progressDialog.show();
-
             DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference(account);
             String selectedDate = getSelectedDate();
             databaseReference.addValueEventListener(new ValueEventListener() {
