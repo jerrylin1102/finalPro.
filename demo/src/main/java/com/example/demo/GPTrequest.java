@@ -20,12 +20,12 @@ public class GPTrequest {
 
         String s =userInput ;
         int maxTokens = 500;
-        double temperature = 0.1;
-
+        double temperature = 1;
+        String prompt = s+ "這些一個或多個食物是(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、油脂與堅果種子類)中的哪幾類(一個或多個)?注意!!只需顯示水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、油脂與堅果種子類，只要類別名稱，其他文字都不要，也不要句號)";
         JSONObject jsonInputObject = new JSONObject();
 
         try {
-            jsonInputObject.put("prompt", s);
+            jsonInputObject.put("prompt", prompt);
             jsonInputObject.put("max_tokens", maxTokens);
             jsonInputObject.put("temperature", temperature);
         }
