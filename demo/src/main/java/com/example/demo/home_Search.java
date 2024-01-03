@@ -2,20 +2,36 @@ package com.example.demo;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class home_Search extends AppCompatActivity {
     private ImageView imgBack;
     private TextView show;
     private Button btnAddClick;
+    private DatePicker datePicker;
+    String account;
+    List<String>foodList=new ArrayList<>();
     String entertext="說中文";//發送給gpt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +43,66 @@ public class home_Search extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(home_Search.this, android.R.color.holo_orange_light));
         show = this.findViewById(R.id.show);
+        datePicker=findViewById(R.id.datePicker);
         btnAddClick = findViewById(R.id.btnAddClick);
         imgBack=findViewById(R.id.imgBack);
         imgBack.setOnClickListener(lis);
-        btnAddClick.setOnClickListener(gptlistener);
+        btnAddClick.setOnClickListener(search_food);
+       // btnAddClick.setOnClickListener(gptlistener);
 
+        userData userData1=com.example.demo.userData.getInstance();
+        account=userData1.getAccount();
+    }
+    private View.OnClickListener search_food=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference(account);
+            String selectedDate = getSelectedDate();
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    foodList.clear();
+                    for(DataSnapshot foodSnapshot:snapshot.getChildren()){
+                        if(foodSnapshot.getKey().equals(selectedDate)){
+                            //foodList.clear();
+                            for(DataSnapshot foods:foodSnapshot.getChildren()){
+                                FoodData foodData=foods.getValue(FoodData.class);
+                                foodList.add(foodData.food);
+                            }
+                        }
+                    }
+                    if(!foodList.isEmpty()){
+                        String sendtoGPT=foodList.toString();
+                        show.setText(sendtoGPT);
+                    }else{
+                        show.setText(null);
+                        Toast.makeText(home_Search.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+    };
+    private String getSelectedDate() {
+        String m;
+        String d;
+        int year = datePicker.getYear();
+        int month = datePicker.getMonth() + 1;
+        if(month<10)
+        {m="0"+String.valueOf(month);}
+        else
+        {m=String.valueOf(month);}
+        int day = datePicker.getDayOfMonth();
+        if(day<10)
+        {d="0"+String.valueOf(day);}
+        else
+        {d=String.valueOf(day);}
+        return String.valueOf(year)+"-"+m+"-"+d;
     }
     private View.OnClickListener lis=new View.OnClickListener() {
         @Override
