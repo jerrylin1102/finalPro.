@@ -11,7 +11,7 @@ import okhttp3.Response;
 
 public class GPTrequest {
     public static final String OPENAI_API_KEY = "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";
-    public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/text-davinci-003/completions";
+    public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions";
 
     public static String sendChatRequest(String userInput) {
         OkHttpClient client = new OkHttpClient();
