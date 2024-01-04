@@ -2,6 +2,7 @@ package com.example.demo;
 
 import android.accounts.Account;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -42,10 +43,18 @@ public class setting extends AppCompatActivity {
     FragmentManager fragmentManager = getFragmentManager();
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
-
     private static final String PREFERENCE_FILE_NAME = "login_preferences";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
-
+    @Override
+    public void onBackPressed() {
+        // 在这里添加您的返回键逻辑
+        // 例如，关闭 FragmentPerson
+        Intent intent = new Intent(this,nologin.class);
+        startActivity(intent);
+        finish();
+        // 调用 super.onBackPressed() 以确保默认的返回键行为
+        super.onBackPressed();
+    }
     @SuppressLint("SuspiciousIndentation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +79,7 @@ public class setting extends AppCompatActivity {
         btn_Username.setOnClickListener(usernamelistener);
         btn_Password.setOnClickListener(passwordlistener);
         btn_logout.setOnClickListener(logoutlistener);
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         reference = firebaseDatabase.getReference("users");
@@ -272,8 +282,9 @@ public class setting extends AppCompatActivity {
     private View.OnClickListener logoutlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            logout();
             finish();
+
+            logout();
         }
     };
     private void logout() {
@@ -283,6 +294,7 @@ public class setting extends AppCompatActivity {
         editor.apply();
         finish();
         goToLoginActivity();
+
 
     }
     private void goToLoginActivity() {

@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,8 @@ public class home_Search extends AppCompatActivity {
     private TextView show;
     private Button btnAddClick;
     private DatePicker datePicker;
+    private String foodresult;
+    private ProgressDialog progressDialog;
     String account;
     List<String>foodList=new ArrayList<>();
     String entertext="說中文";//發送給gpt
@@ -47,49 +50,12 @@ public class home_Search extends AppCompatActivity {
         btnAddClick = findViewById(R.id.btnAddClick);
         imgBack=findViewById(R.id.imgBack);
         imgBack.setOnClickListener(lis);
-        btnAddClick.setOnClickListener(search_food);
-       // btnAddClick.setOnClickListener(gptlistener);
+        //btnAddClick.setOnClickListener(search_food);
+        btnAddClick.setOnClickListener(gptlistener);
 
         userData userData1=com.example.demo.userData.getInstance();
         account=userData1.getAccount();
     }
-
-    private View.OnClickListener search_food=new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            //取得firebase裡「」
-            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference(account);
-            String selectedDate = getSelectedDate();
-            databaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    foodList.clear();
-                    for(DataSnapshot foodSnapshot:snapshot.getChildren()){
-                        if(foodSnapshot.getKey().equals(selectedDate)){
-                            //foodList.clear();
-                            for(DataSnapshot foods:foodSnapshot.getChildren()){
-                                FoodData foodData=foods.getValue(FoodData.class);
-                                foodList.add(foodData.food);
-                            }
-                        }
-                    }
-                    if(!foodList.isEmpty()){
-                        String sendtoGPT=foodList.toString();
-                        show.setText("當天食用過的食物為\n\n"+sendtoGPT+"\n\n偵測到這些食物含有\n\n");
-                    }else{
-                        show.setText(null);
-                        Toast.makeText(home_Search.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }
-    };
     private String getSelectedDate() {
         String m;
         String d;
@@ -124,8 +90,9 @@ public class home_Search extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             // 处理ChatGPT的响应，更新UI等
-
-            show.setText(result);
+            //顯示
+            progressDialog.dismiss();
+            show.setText("你今天吃的食物:\r\n\n"+foodresult+"\n\n你今天攝取:"+result);
         }
     }
 
@@ -137,10 +104,51 @@ public class home_Search extends AppCompatActivity {
     private View.OnClickListener gptlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            progressDialog = new ProgressDialog(home_Search.this);
+            progressDialog.setMessage("Waiting for ChatGPT...嚶嚶嚶");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference(account);
+            String selectedDate = getSelectedDate();
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    foodList.clear();
+                    for(DataSnapshot foodSnapshot:snapshot.getChildren()){
+                        if(foodSnapshot.getKey().equals(selectedDate)){
+                            //foodList.clear();
+                            for(DataSnapshot foods:foodSnapshot.getChildren()){
+                                FoodData foodData=foods.getValue(FoodData.class);
+                                foodList.add(foodData.food);
+                            }
+                        }
+                    }
+                    if(!foodList.isEmpty()){
+                        String sendtoGPT=foodList.toString();//Send to GPT
+                        foodresult = sendtoGPT;
+                        new ChatGPTTask().execute(sendtoGPT);
+
+                        //show.setText(sendtoGPT);
+                    }else{
+                        progressDialog.dismiss();
+                        show.setText(null);
+                        Toast.makeText(home_Search.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    progressDialog.dismiss();
+                }
+            });
             // 在这里调用ChatGPT请求的示例
             //String userInput =edt.getText().toString() ; // 替换为用户实际输入
             //new ChatGPTTask().execute(userInput);
-            new ChatGPTTask().execute(entertext);
+            //new ChatGPTTask().execute(entertext);
+            //
+
         }
     };
 }
