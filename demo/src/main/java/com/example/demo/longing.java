@@ -97,7 +97,7 @@ public class longing extends AppCompatActivity {
     public Boolean vaidateUsername(){
         String val=loginUsername.getText().toString();
         if(val.isEmpty()){
-            loginUsername.setError("Username cannot bt empty"); //跟你說不能沒有填東西
+            loginUsername.setError("帳號不得為空"); //跟你說不能沒有填東西
             return false;
         }else {
             loginUsername.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
@@ -107,7 +107,7 @@ public class longing extends AppCompatActivity {
     public Boolean vaidatePassword(){
         String val=loginPassword.getText().toString();
         if(val.isEmpty()){
-            loginPassword.setError("Password cannot bt empty");//跟你說不能沒有填東西
+            loginPassword.setError("密碼不得為空");//跟你說不能沒有填東西
             return false;
         }else {
             loginPassword.setError(null);// 清除與 loginPassword 相關聯的錯誤訊息
@@ -120,7 +120,6 @@ public class longing extends AppCompatActivity {
         //db setting
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUserDatabase = reference.orderByChild("name").equalTo(userUsername);
-
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

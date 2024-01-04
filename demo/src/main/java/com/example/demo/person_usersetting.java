@@ -1,8 +1,6 @@
 package com.example.demo;
 
-import android.accounts.Account;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.content.Context;
@@ -10,10 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -30,14 +25,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.jar.Attributes;
-import com.example.demo.FragmentPerson;
 
-
-public class setting extends AppCompatActivity {
+public class person_usersetting extends AppCompatActivity {
     private ImageView imgBack;
     private Button btn_Account, btn_Password, btn_Username, btn_Email,btn_logout;
     FragmentManager fragmentManager = getFragmentManager();
@@ -59,13 +50,13 @@ public class setting extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting);
+        setContentView(R.layout.peron_setting);
 
         //顏色
-        Window window = setting.this.getWindow();
+        Window window = person_usersetting.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        window.setStatusBarColor(ContextCompat.getColor(setting.this, android.R.color.holo_orange_light));
+        window.setStatusBarColor(ContextCompat.getColor(person_usersetting.this, android.R.color.holo_orange_light));
         btn_logout = this.findViewById(R.id.btn_logout);
         btn_Account = findViewById(R.id.btn_Account);
         btn_Username = findViewById(R.id.btn_Username);
@@ -133,7 +124,7 @@ public class setting extends AppCompatActivity {
             /*Intent intent = new Intent(setting.this,nologin.class);
             startActivity(intent);
             finish();*/
-            Intent intent = new Intent(setting.this, nologin.class);
+            Intent intent = new Intent(person_usersetting.this, nologin.class);
             intent.putExtra("selectedFragment", 2); // 將選擇的 Fragment 索引傳遞給 nologin Activity
             startActivity(intent);
             finish();
@@ -144,9 +135,9 @@ public class setting extends AppCompatActivity {
     private View.OnClickListener passwordlistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder reset = new AlertDialog.Builder(setting.this);
-            RelativeLayout layout = new RelativeLayout(setting.this);
-            final EditText input = new EditText(setting.this);
+            AlertDialog.Builder reset = new AlertDialog.Builder(person_usersetting.this);
+            RelativeLayout layout = new RelativeLayout(person_usersetting.this);
+            final EditText input = new EditText(person_usersetting.this);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -175,7 +166,7 @@ public class setting extends AppCompatActivity {
 
                     HelperClass helperClass = new HelperClass(userData.getAccount(), userData.getEmail(), userData.getName(), userData.getPw());
                     reference.child(userData.getAccount()).setValue(helperClass);
-                    Toast.makeText(setting.this, "密碼更改成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(person_usersetting.this, "密碼更改成功", Toast.LENGTH_SHORT).show();
                 }
             });
             reset.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -191,9 +182,9 @@ public class setting extends AppCompatActivity {
     private View.OnClickListener usernamelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder reset = new AlertDialog.Builder(setting.this);
-            RelativeLayout layout = new RelativeLayout(setting.this);
-            final EditText input = new EditText(setting.this);
+            AlertDialog.Builder reset = new AlertDialog.Builder(person_usersetting.this);
+            RelativeLayout layout = new RelativeLayout(person_usersetting.this);
+            final EditText input = new EditText(person_usersetting.this);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -221,7 +212,7 @@ public class setting extends AppCompatActivity {
 
                     HelperClass helperClass = new HelperClass(userData.getAccount(), userData.getEmail(), userData.getName(), userData.getPw());
                     reference.child(userData.getAccount()).setValue(helperClass);
-                    Toast.makeText(setting.this, "暱稱更改成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(person_usersetting.this, "暱稱更改成功", Toast.LENGTH_SHORT).show();
                 }
             });
             reset.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -237,9 +228,9 @@ public class setting extends AppCompatActivity {
     private View.OnClickListener emaillistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder reset = new AlertDialog.Builder(setting.this);
-            RelativeLayout layout = new RelativeLayout(setting.this);
-            final EditText input = new EditText(setting.this);
+            AlertDialog.Builder reset = new AlertDialog.Builder(person_usersetting.this);
+            RelativeLayout layout = new RelativeLayout(person_usersetting.this);
+            final EditText input = new EditText(person_usersetting.this);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT
@@ -267,7 +258,7 @@ public class setting extends AppCompatActivity {
 
                     HelperClass helperClass = new HelperClass(userData.getAccount(), userData.getEmail(), userData.getName(), userData.getPw());
                     reference.child(userData.getAccount()).setValue(helperClass);
-                    Toast.makeText(setting.this, "Email更改成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(person_usersetting.this, "Email更改成功", Toast.LENGTH_SHORT).show();
                 }
             });
             reset.setNegativeButton("取消", new DialogInterface.OnClickListener() {

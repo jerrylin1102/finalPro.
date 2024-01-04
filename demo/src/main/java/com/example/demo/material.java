@@ -14,7 +14,7 @@ public class material extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.material);
+        setContentView(R.layout.person_material);
 
         //顏色
         Window window=material.this.getWindow();

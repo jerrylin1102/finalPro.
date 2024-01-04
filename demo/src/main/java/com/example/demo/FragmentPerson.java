@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,17 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 /**
@@ -48,7 +42,7 @@ public class FragmentPerson extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ImageView icon;
+    private ImageView icon,img_help;
     private TextView personname;
     public FragmentPerson() {
         // Required empty public constructor
@@ -95,7 +89,8 @@ public class FragmentPerson extends Fragment {
         View view = inflater.inflate(R.layout.fragment_person, container, false);
         final Context context=getActivity();
         Intent material=new Intent(context,material.class);
-        Intent setting=new Intent(context,setting.class);
+        Intent setting=new Intent(context, person_usersetting.class);
+        Intent home_help=new Intent(context, person_help.class);
         personname = view.findViewById(R.id.personname);
         icon = view.findViewById(R.id.icon);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -130,6 +125,14 @@ public class FragmentPerson extends Fragment {
 
         ImageView imgSitting=view.findViewById(R.id.setting);
         ImageView imgmaterial=view.findViewById(R.id.material);
+        ImageView img_help=view.findViewById(R.id.img_help);
+
+        img_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(home_help);
+            }
+        });
         imgmaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -92,14 +92,13 @@ public class home_Search extends AppCompatActivity {
             // 处理ChatGPT的响应，更新UI等
             //顯示
             progressDialog.dismiss();
-            show.setText("你今天吃的食物:\r\n\n"+foodresult+"\n\n你今天攝取:"+result);
+            show.setText("你今天吃的食物有:\r\n\n"+foodresult+"\n\n你今天攝取:"+result);
         }
     }
 
     private String sendChatRequest(String userInput) {
-        // 将之前提到的发送ChatGPT请求的代码放在这里
-        // 返回ChatGPT的响应字符串
-        return GPTrequest.sendChatRequest(userInput); // 替换为实际的ChatGPT响应
+
+        return GPTrequest.sendChatRequest(userInput);
     }
     private View.OnClickListener gptlistener = new View.OnClickListener() {
         @Override

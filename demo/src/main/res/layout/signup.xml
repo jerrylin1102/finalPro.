@@ -33,7 +33,7 @@
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
+                android:text="註冊"
                 android:textAlignment="center"
                 android:textColor="@color/iconcolor"
                 android:textSize="36sp"
@@ -47,7 +47,7 @@
                 android:background="@drawable/custome"
                 android:drawableLeft="@drawable/person"
                 android:drawablePadding="8dp"
-                android:hint="Account"
+                android:hint="帳號"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background" />
@@ -60,7 +60,7 @@
                 android:background="@drawable/custome"
                 android:drawableLeft="@drawable/baseline_person_pin_24"
                 android:drawablePadding="8dp"
-                android:hint="Username"
+                android:hint="暱稱"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background" />
@@ -73,7 +73,7 @@
                 android:background="@drawable/custome"
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
-                android:hint="Password"
+                android:hint="密碼"
                 android:inputType="textPassword"
                 android:padding="8dp"
                 android:textColor="@color/black"
@@ -87,7 +87,7 @@
                 android:background="@drawable/custome"
                 android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:hint="Email"
+                android:hint="信箱"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background" />
@@ -96,21 +96,22 @@
                 android:id="@+id/signup_Button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Sign up"
-                android:textSize="18sp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/FF"
-                app:cornerRadius="20dp"/>
+                android:text="註冊"
+                android:textSize="18sp"
+                app:cornerRadius="20dp" />
+
             <TextView
+                android:id="@+id/signupText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Already on user? Login"
-                android:textSize="18sp"
-                android:textAlignment="center"
-                android:id="@+id/signupText"
                 android:layout_marginTop="18dp"
+                android:padding="8dp"
+                android:text="已經有帳號嗎?   登入"
+                android:textAlignment="center"
                 android:textColor="@color/iconcolor"
+                android:textSize="18sp"
 
                 />
         </LinearLayout>

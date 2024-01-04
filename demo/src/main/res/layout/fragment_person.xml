@@ -40,7 +40,7 @@
         android:id="@+id/setting"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="88dp"
         android:src="@drawable/setting"
         app:layout_constraintStart_toEndOf="@+id/material"
         app:layout_constraintTop_toTopOf="@+id/material" />
@@ -49,7 +49,7 @@
         android:id="@+id/material"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="184dp"
         android:src="@drawable/baseline_add_chart_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +78,27 @@
         app:layout_constraintEnd_toEndOf="@+id/setting"
         app:layout_constraintStart_toStartOf="@+id/setting"
         app:layout_constraintTop_toBottomOf="@+id/setting" />
+
+    <ImageView
+        android:id="@+id/img_help"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="80dp"
+        android:src="@drawable/help"
+        app:layout_constraintStart_toEndOf="@+id/setting"
+        app:layout_constraintTop_toTopOf="@+id/setting" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="幫助"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/img_help"
+        app:layout_constraintStart_toStartOf="@+id/img_help"
+        app:layout_constraintTop_toBottomOf="@+id/img_help" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

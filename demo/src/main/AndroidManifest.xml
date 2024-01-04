@@ -20,13 +20,13 @@
         </activity>
             <activity android:label="nologin" android:name=".nologin" />
             <activity android:label="logining" android:name=".longing" />
-            <activity android:label="setting" android:name=".setting" />
+            <activity android:label="setting" android:name=".person_usersetting" />
             <activity android:label="material" android:name=".material"/>
             <activity android:label="home_Add" android:name=".home_Add"/>
             <activity android:label="signup" android:name=".signup"/>
             <activity android:label="home_Search" android:name=".home_Search"/>
             <activity android:name=".home_Remove" android:label="home_Remove"/>
-            <activity android:name=".home_help" android:label="home_help"/>
+            <activity android:name=".person_help" android:label="home_help"/>
             <activity android:name=".home_diet_inspection" android:label="home_inspection"/>
 
 

@@ -55,6 +55,16 @@ public class home_Add extends AppCompatActivity {
         //this is account
 
     }
+    public Boolean vaidateFood(){
+        String val=eatFood.getText().toString();
+        if(val.isEmpty()){
+            eatFood.setError("食物不得為空"); //跟你說不能沒有填東西
+            return false;
+        }else {
+            eatFood.setError(null); // 清除與 loginUsername 相關聯的錯誤訊息
+            return true;
+        }
+    }
     private View.OnClickListener lis=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -80,20 +90,25 @@ public class home_Add extends AppCompatActivity {
             {d="0"+String.valueOf(day);}
             else
             {d=String.valueOf(day);}
-            String Date=String.valueOf(year)+"-"+m+"-"+d;
-            Toast.makeText(home_Add.this, Date+"新增了"+food, Toast.LENGTH_SHORT).show();
-            eatFood.setText("");
 
-            String dateString= String.format(Date);
+            if(!vaidateFood()){
 
-            //以下為把資料輸進database
-            database=FirebaseDatabase.getInstance();
-            reference=database.getReference(account);
-            DatabaseReference reference1=FirebaseDatabase.getInstance().getReference(account);
+            }else {
+                String Date = String.valueOf(year) + "-" + m + "-" + d;
+                Toast.makeText(home_Add.this, Date + "新增了" + food, Toast.LENGTH_SHORT).show();
+                eatFood.setText("");
 
-            FoodData foodData=new FoodData(Date,food);
-            Log.d("FoodData", dateString);
-            reference1.child(dateString).push().setValue(foodData);
+                String dateString = String.format(Date);
+
+                //以下為把資料輸進database
+                database = FirebaseDatabase.getInstance();
+                reference = database.getReference(account);
+                DatabaseReference reference1 = FirebaseDatabase.getInstance().getReference(account);
+
+                FoodData foodData = new FoodData(Date, food);
+                Log.d("FoodData", dateString);
+                reference1.child(dateString).push().setValue(foodData);
+            }
         }
     };
     private String readAccount() {
