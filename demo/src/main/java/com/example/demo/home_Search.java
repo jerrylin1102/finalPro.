@@ -53,9 +53,11 @@ public class home_Search extends AppCompatActivity {
         userData userData1=com.example.demo.userData.getInstance();
         account=userData1.getAccount();
     }
+
     private View.OnClickListener search_food=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            //取得firebase裡「」
             DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference(account);
             String selectedDate = getSelectedDate();
             databaseReference.addValueEventListener(new ValueEventListener() {
@@ -73,7 +75,7 @@ public class home_Search extends AppCompatActivity {
                     }
                     if(!foodList.isEmpty()){
                         String sendtoGPT=foodList.toString();
-                        show.setText(sendtoGPT);
+                        show.setText("當天食用過的食物為\n\n"+sendtoGPT+"\n\n偵測到這些食物含有\n\n");
                     }else{
                         show.setText(null);
                         Toast.makeText(home_Search.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();

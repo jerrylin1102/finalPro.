@@ -6,9 +6,15 @@
         <item name="colorControlNormal">#FFBB00</item>
         <item name="android:editTextStyle">@style/Widget.EditText.White</item>
     </style>
+
     <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
         <!--文字颜色-->
         <item name="android:textColor">@color/iconcolor</item>
+    </style>
+
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#ADB6AF</item>
+        <item name="colorControlActivated">#F7F13D</item>
     </style>
 
 

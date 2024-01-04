@@ -69,7 +69,7 @@ public class FragmentHome extends Fragment {
         Intent home_Add=new Intent(context,home_Add.class);
         Intent home_Remove=new Intent(context,home_Remove.class);
         Intent home_help=new Intent(context, home_help.class);
-        Intent home_inspection = new Intent(context, diet_inspection.class);
+        Intent home_inspection = new Intent(context, home_diet_inspection.class);
 
         ImageView imgAdd=view.findViewById(R.id.add);
         ImageView imgRemove=view.findViewById(R.id.remove);
