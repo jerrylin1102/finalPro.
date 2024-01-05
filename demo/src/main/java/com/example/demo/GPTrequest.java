@@ -12,6 +12,7 @@ import okhttp3.Response;
 public class GPTrequest {
     static String model = "gpt-3.5-turbo-instruct";
     //static String model = "gpt-3.5-turbo-1106";
+    //static  String model = "gpt-3.5-turbo";
     public static final String OPENAI_API_KEY = "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";
     public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/"+model+"/completions";
 
@@ -22,7 +23,7 @@ public class GPTrequest {
 
         String s =userInput ;
         int maxTokens = 500;
-        double temperature = 1;
+        double temperature = 0.6;
         String prompt = s;
         JSONObject jsonInputObject = new JSONObject();
 
