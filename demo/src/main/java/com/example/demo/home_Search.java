@@ -172,8 +172,8 @@ public class home_Search extends AppCompatActivity {
                         String strfood=foodList.toString();//Send to GPT
                         foodresult = strfood;
                         String sendtoGPT="請根據食物類別(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、" +
-                                         "油脂與堅果種子類)分類以下餐點(只需顯示有攝取到的類別名稱，不需顯示食物名稱，也不須顯示類別名稱外的其他文字。" +
-                                         "請仔細檢查每種餐點對應到的類別。每個類別名稱只能顯示一遍)："+strfood;
+                                         "油脂與堅果種子類)分類以下餐點(只需顯示有攝取到的類別完整名稱(例如:水果類、蔬菜類...等等)，不需顯示食物名稱，也不得顯示類別名稱外的其他文字，每顯示一個類別就幫我換一行。" +
+                                         "請仔細檢查每種餐點對應到的類別。每個類別名稱只能顯示一遍，不得重複出現，請一定要符合所有的規則)："+strfood;
                         new ChatGPTTask().execute(sendtoGPT);
                         //show.setText(sendtoGPT);
                     }else{
