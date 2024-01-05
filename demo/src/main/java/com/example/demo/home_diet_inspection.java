@@ -57,8 +57,6 @@ public class home_diet_inspection extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
-            imgBack.setOnClickListener(lis);
-
             show.setText(foodList.toString());
         }
     };

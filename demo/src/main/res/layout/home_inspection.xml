@@ -180,7 +180,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageV"
+            android:id="@+id/imgA"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="60dp"
@@ -194,8 +194,8 @@
             android:layout_height="80dp"
             android:layout_marginStart="50dp"
             android:src="@drawable/check_cheese"
-            app:layout_constraintStart_toEndOf="@+id/imageV"
-            app:layout_constraintTop_toTopOf="@+id/imageV" />
+            app:layout_constraintStart_toEndOf="@+id/imgA"
+            app:layout_constraintTop_toTopOf="@+id/imgA" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
         android:id="@+id/btnSearch"

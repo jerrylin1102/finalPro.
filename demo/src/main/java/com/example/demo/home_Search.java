@@ -1,8 +1,10 @@
 package com.example.demo;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -24,17 +26,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class home_Search extends AppCompatActivity {
-    private ImageView imgBack;
-    private TextView show;
+    private ImageView imgBack,imgQ,imgA;
+    private TextView show,show2,showQ,showA;
     private Button btnAddClick;
     private DatePicker datePicker;
     private String foodresult;
     private ProgressDialog progressDialog;
     String account;
     List<String>foodList=new ArrayList<>();
+    String[]array=new String[6];
     String entertext="說中文";//發送給gpt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +50,15 @@ public class home_Search extends AppCompatActivity {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.setStatusBarColor(ContextCompat.getColor(home_Search.this, android.R.color.holo_orange_light));
         show = this.findViewById(R.id.show);
+        show2=findViewById(R.id.show1);
         datePicker=findViewById(R.id.datePicker);
         btnAddClick = findViewById(R.id.btnAddClick);
         imgBack=findViewById(R.id.imgBack);
+        imgQ=findViewById(R.id.imgQ);
+        imgA=findViewById(R.id.imgA);
+        showA=findViewById(R.id.showA);
+        showQ=findViewById(R.id.showQ);
+
         imgBack.setOnClickListener(lis);
         //btnAddClick.setOnClickListener(search_food);
         btnAddClick.setOnClickListener(gptlistener);
@@ -91,8 +101,38 @@ public class home_Search extends AppCompatActivity {
         protected void onPostExecute(String result) {
             // 处理ChatGPT的响应，更新UI等
             //顯示
+            Log.d("s","result="+result);
+            showA.setBackgroundColor(Color.parseColor("#FFED97"));
+            showQ.setBackgroundColor(Color.parseColor("#FFED97"));
+            showA.setVisibility(View.VISIBLE);
+            showQ.setVisibility(View.VISIBLE);
+            array=result.trim().split("、");
+            int num=array.length;
+            show.setBackgroundColor(Color.parseColor("#FFFFCE"));
+            show.setText(foodresult);
+            if(num<3)
+            {
+                show2.setBackgroundColor(Color.parseColor("#FFFFCE"));
+                show2.setText(Arrays.toString(array)+"\n你好爛請繼續努力");
+                imgA.setImageResource(R.drawable.angre);
+            }
+            else if(num==3&&num<5)
+            {
+                show2.setBackgroundColor(Color.parseColor("#FFFFCE"));
+                show2.setText(Arrays.toString(array)+"\n還可以更好!");
+                imgA.setImageResource(R.drawable.happy);
+            }
+            else if(num>=5)
+            {
+                show2.setBackgroundColor(Color.parseColor("#FFFFCE"));
+                show2.setText(Arrays.toString(array)+"\n鵝鵝愛尼");
+                imgA.setImageResource(R.drawable.love);
+            }
             progressDialog.dismiss();
-            show.setText("你今天吃的食物有:\r\n\n"+foodresult+"\n\n你今天攝取:"+result);
+            imgQ.setVisibility(View.VISIBLE);
+            imgA.setVisibility(View.VISIBLE);
+
+
         }
     }
 
