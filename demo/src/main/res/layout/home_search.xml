@@ -88,8 +88,8 @@
 
             <ImageView
                 android:id="@+id/imgQ"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/talk"
                 android:visibility="invisible"
@@ -116,7 +116,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="你今天吃的食物有:"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="invisible"
@@ -144,8 +143,8 @@
 
             <ImageView
                 android:id="@+id/imgA"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/talk"
                 android:visibility="invisible"
@@ -172,7 +171,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="總共攝取了:"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:visibility="invisible"

@@ -112,6 +112,8 @@ public class home_Search extends AppCompatActivity {
             Log.d("array","array="+Arrays.toString(array));
             Log.d("num","num="+num);
             show.setBackgroundColor(Color.parseColor("#FFFFCE"));
+            showQ.setText("你今天吃了");
+            showA.setText("你今天總共攝取了:");
             show.setText(foodresult);
             if(num<3)
             {
@@ -182,6 +184,15 @@ public class home_Search extends AppCompatActivity {
                     }else{
                         progressDialog.dismiss();
                         show.setText(null);
+                        show2.setText(null);
+                        showA.setText(null);
+                        showQ.setText(null);
+                        show.setBackgroundColor(Color.TRANSPARENT);
+                        show2.setBackgroundColor(Color.TRANSPARENT);
+                        showA.setBackgroundColor(Color.TRANSPARENT);
+                        showQ.setBackgroundColor(Color.TRANSPARENT);
+                        imgA.setVisibility(View.INVISIBLE);
+                        imgQ.setVisibility(View.INVISIBLE);
                         Toast.makeText(home_Search.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();
                     }
                 }
