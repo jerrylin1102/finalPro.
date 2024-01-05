@@ -10,8 +10,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GPTrequest {
+    static String model = "gpt-3.5-turbo-instruct";
+    //static String model = "gpt-3.5-turbo-1106";
     public static final String OPENAI_API_KEY = "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";
-    public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions";
+    public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/"+model+"/completions";
 
     public static String sendChatRequest(String userInput) {
         OkHttpClient client = new OkHttpClient();
@@ -21,7 +23,7 @@ public class GPTrequest {
         String s =userInput ;
         int maxTokens = 500;
         double temperature = 1;
-        String prompt = s+ "這些一個或多個食物是(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、油脂與堅果種子類)中的哪幾類(一個或多個)?注意!!只需顯示水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、油脂與堅果種子類，只要類別名稱，其他文字都不要，也不要句號)";
+        String prompt = s;
         JSONObject jsonInputObject = new JSONObject();
 
         try {
