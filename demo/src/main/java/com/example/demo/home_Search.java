@@ -93,6 +93,7 @@ public class home_Search extends AppCompatActivity {
             //顯示
             progressDialog.dismiss();
             show.setText("你今天吃的食物有:\r\n\n"+foodresult+"\n\n你今天攝取:"+result);
+            Log.e("",result);
         }
     }
 
@@ -124,11 +125,14 @@ public class home_Search extends AppCompatActivity {
                         }
                     }
                     if(!foodList.isEmpty()){
-                        String sendtoGPT=foodList.toString();//Send to GPT
-                        foodresult = sendtoGPT;
-                        sendtoGPT+="這些一個或多個食物是(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、" +
+                        String strfood=foodList.toString();//Send to GPT
+                        foodresult = strfood;
+
+                        /*sendtoGPT+="這些食物是(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、" +
                                 "油脂與堅果種子類)中的哪幾類(一個或多個)?注意!!只需顯示水果類、蔬菜類、全穀根莖類" +
-                                "、豆蛋魚肉類、奶類、油脂與堅果種子類，只要類別名稱，其他文字都不要，也不要句號)";
+                                "、豆蛋魚肉類、奶類、油脂與堅果種子類，只要類別名稱，其他文字都不要，也不要句號)";*/
+                        String sendtoGPT="請根據食物類別(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、油脂與堅果種子類)分類以下食材：："+strfood;
+                       // String sendtoGPT="請根據以下食物，分類為水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、油脂與堅果種子類："+strfood+;
                         new ChatGPTTask().execute(sendtoGPT);
 
                         //show.setText(sendtoGPT);

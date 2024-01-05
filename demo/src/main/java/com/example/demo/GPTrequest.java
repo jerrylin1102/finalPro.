@@ -10,8 +10,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GPTrequest {
+    static String model = "gpt-3.5-turbo-instruct";
+    //static String model = "gpt-3.5-turbo-1106";
     public static final String OPENAI_API_KEY = "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";
-    public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/gpt-3.5-turbo-instruct/completions";
+    public static final String OPENAI_API_URL = "https://api.openai.com/v1/engines/"+model+"/completions";
 
     public static String sendChatRequest(String userInput) {
         OkHttpClient client = new OkHttpClient();
