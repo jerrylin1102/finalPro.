@@ -208,7 +208,7 @@
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/show01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

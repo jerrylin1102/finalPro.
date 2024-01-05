@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -8,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,6 +24,8 @@ public class home_diet_inspection extends AppCompatActivity {
     private Button btnsearch;
     private CheckBox che_fruit,che_bread,che_vegetable,che_oil,che_fish,che_milk;
     private TextView show;
+    private ProgressDialog progressDialog;
+
     List<String> foodList=new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +43,7 @@ public class home_diet_inspection extends AppCompatActivity {
         che_fish=findViewById(R.id.checkFish);
         che_milk=findViewById(R.id.checkMilk);
         btnsearch=findViewById(R.id.btnSearch);
-        show=findViewById(R.id.textView12);
+        show=this.findViewById(R.id.show01);
 
 
         che_fruit.setOnCheckedChangeListener(chk);
@@ -50,7 +53,7 @@ public class home_diet_inspection extends AppCompatActivity {
         che_fish.setOnCheckedChangeListener(chk);
         che_milk.setOnCheckedChangeListener(chk);
         imgBack.setOnClickListener(lis);
-        btnsearch.setOnClickListener(S);
+        btnsearch.setOnClickListener(gptlistener);
 
     }
     private View.OnClickListener S=new View.OnClickListener() {
@@ -66,7 +69,43 @@ public class home_diet_inspection extends AppCompatActivity {
             finish();
         }
     };
+    private class ChatGPTTask extends AsyncTask<String, Void, String> {
 
+        @Override
+        protected String doInBackground(String... params) {
+            String userInput = params[0];
+            return sendChatRequest(userInput);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // 处理ChatGPT的响应，更新UI等
+            //顯示
+            progressDialog.dismiss();
+            show.setText(result);
+        }
+    }
+
+    private String sendChatRequest(String userInput) {
+
+        return GPTrequest.sendChatRequest(userInput);
+    }
+    private View.OnClickListener gptlistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            progressDialog = new ProgressDialog(home_diet_inspection.this);
+            progressDialog.setMessage("Waiting for ChatGPT...嚶嚶嚶");
+            progressDialog.setIndeterminate(true);
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+            String sendtoGPT = "根據下列營養，分別幫我列出一至兩個推薦的餐點(只需列出餐點名稱，其他都不用)"+foodList.toString();
+            // 在这里调用ChatGPT请求的示例
+            //String userInput =edt.getText().toString() ; // 替换为用户实际输入
+            new ChatGPTTask().execute(sendtoGPT);
+            //new ChatGPTTask().execute(entertext);
+            //
+        }
+    };
     private CompoundButton.OnCheckedChangeListener chk=new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
