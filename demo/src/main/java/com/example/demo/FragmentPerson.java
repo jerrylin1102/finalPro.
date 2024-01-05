@@ -179,9 +179,22 @@ public class FragmentPerson extends Fragment {
                 currentImageIndex = 3;
                 break;
             case 3:
+                icon.setImageResource(R.mipmap.icon04);
+                currentImageIndex=4;
+                break;
+            case 4:
+                icon.setImageResource(R.mipmap.icon05);
+                currentImageIndex=5;
+                break;
+            case 5:
+                icon.setImageResource(R.mipmap.icon06);
+                currentImageIndex=6;
+                break;
+            case 6:
                 icon.setImageResource(R.mipmap.icon01);
                 currentImageIndex = 1;
                 break;
+
         }
     }
 }

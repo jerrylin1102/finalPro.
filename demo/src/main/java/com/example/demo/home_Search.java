@@ -37,7 +37,10 @@ public class home_Search extends AppCompatActivity {
     private String foodresult;
     private ProgressDialog progressDialog;
     String account;
+    String[]ar1=new String[10];
     List<String>foodList=new ArrayList<>();
+
+
 
     String entertext="說中文";//發送給gpt
     @Override
@@ -106,11 +109,42 @@ public class home_Search extends AppCompatActivity {
             showQ.setBackgroundColor(Color.parseColor("#FFED97"));
             showA.setVisibility(View.VISIBLE);
             showQ.setVisibility(View.VISIBLE);
-            String[]array=result.trim().split("、");
-            int num=array.length;
+            //String[]array=result.trim().split("\n");
+            Arrays.fill(ar1,null);
+            ar1=result.trim().split("、");
+            int num=0;
+            int arnum1=0;
+            Log.d("re","result="+result);
+            Log.d("d","ar1="+ar1);
 
-            Log.d("array","array="+Arrays.toString(array));
+
+            if (result.contains("水果")) {
+                Log.d("n","num有接收到水果");
+                num=num+1;
+            }
+            if(result.contains("榖根莖")){
+                Log.d("n","num有接收到全榖根莖");
+                num=num+1;
+            }
+            if (result.contains("蔬菜")) {
+                Log.d("n","num有接收到蔬菜");
+                num=num+1;
+            }
+            if (result.contains("奶類")){
+                Log.d("n","num有接收到奶類");
+                num=num+1;
+            }
+            if(result.contains("油脂")){
+                Log.d("n","num有接收到油脂");
+                num=num+1;
+            }
+            if (result.contains("豆蛋")) {
+                Log.d("n","num有接收到蛋豆魚肉");
+                num=num+1;
+            }
+
             Log.d("num","num="+num);
+            Log.d("arnum","arnum="+arnum1);
             show.setBackgroundColor(Color.parseColor("#FFFFCE"));
             showQ.setText("你今天吃了");
             showA.setText("你今天總共攝取了:");
@@ -118,19 +152,19 @@ public class home_Search extends AppCompatActivity {
             if(num<3)
             {
                 show2.setBackgroundColor(Color.parseColor("#FFFFCE"));
-                show2.setText(Arrays.toString(array)+"\n你好爛請繼續努力");
+                show2.setText(Arrays.toString(ar1)+"\n你好爛請繼續努力");
                 imgA.setImageResource(R.drawable.angre);
             }
-            else if(num==3&&num<5)
+            if(num>=3&&num<5)
             {
                 show2.setBackgroundColor(Color.parseColor("#FFFFCE"));
-                show2.setText(Arrays.toString(array)+"\n還可以更好!");
+                show2.setText(Arrays.toString(ar1)+"\n還可以更好!");
                 imgA.setImageResource(R.drawable.happy);
             }
-            else if(num>=5)
+            if(num>=5)
             {
                 show2.setBackgroundColor(Color.parseColor("#FFFFCE"));
-                show2.setText(Arrays.toString(array)+"\n鵝鵝愛尼");
+                show2.setText(Arrays.toString(ar1)+"\n鵝鵝愛尼");
                 imgA.setImageResource(R.drawable.love);
             }
             progressDialog.dismiss();

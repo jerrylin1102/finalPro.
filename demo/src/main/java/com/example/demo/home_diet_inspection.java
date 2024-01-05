@@ -1,8 +1,10 @@
 package com.example.demo;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,10 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class home_diet_inspection extends AppCompatActivity {
-    private ImageView imgBack;
+    private ImageView imgBack,imgShow;
     private Button btnsearch;
     private CheckBox che_fruit,che_bread,che_vegetable,che_oil,che_fish,che_milk;
-    private TextView show;
+    private TextView show,showduck;
     private ProgressDialog progressDialog;
 
     List<String> foodList=new ArrayList<>();
@@ -42,6 +44,8 @@ public class home_diet_inspection extends AppCompatActivity {
         che_oil=findViewById(R.id.checkOil);
         che_fish=findViewById(R.id.checkFish);
         che_milk=findViewById(R.id.checkMilk);
+        imgShow=findViewById(R.id.imageView5);
+        showduck=findViewById(R.id.Showduck);
         btnsearch=findViewById(R.id.btnSearch);
         show=this.findViewById(R.id.show01);
 
@@ -81,8 +85,15 @@ public class home_diet_inspection extends AppCompatActivity {
         protected void onPostExecute(String result) {
             // 处理ChatGPT的响应，更新UI等
             //顯示
+            Log.e("r","re="+result);
+            String R=result.trim();
+            Log.e("R","R="+R);
+            imgShow.setVisibility(View.VISIBLE);
+            showduck.setVisibility(View.VISIBLE);
             progressDialog.dismiss();
-            show.setText(result);
+            show.setText(R);
+            showduck.setBackgroundColor(Color.parseColor("#FFED97"));
+            show.setBackgroundColor(Color.parseColor("#FFFFCE"));
         }
     }
 
