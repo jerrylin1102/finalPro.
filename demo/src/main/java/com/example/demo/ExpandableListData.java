@@ -26,18 +26,14 @@ public class ExpandableListData {
 
 
         List<String> item4 = new ArrayList<String>();
-        item4.add("飲食檢查");
+        item4.add("何謂飲食檢查?");
         item4.add("1.勾選您缺乏的飲食營養 \n\n2.按下搜索，資料會被傳到GPT\n\n3.下方會顯示飲食營養可從那些部分攝取");
 
-
-        List<String> item5 = new ArrayList<String>();
-        item5.add("數據");
 
         expandableListDetail.put("增加資料", item1);//父項目的內容設定
         expandableListDetail.put("刪除資料", item2);
         expandableListDetail.put("搜索", item3);
         expandableListDetail.put("飲食檢查", item4);
-        expandableListDetail.put("數據", item5);
 
         return expandableListDetail;
     }
