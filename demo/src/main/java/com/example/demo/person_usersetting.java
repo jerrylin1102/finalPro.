@@ -152,7 +152,7 @@ public class person_usersetting extends AppCompatActivity {
             layout.addView(input);
 
             reset.setTitle("更改視窗");
-            reset.setIcon(R.mipmap.reset);
+            reset.setIcon(R.drawable.setting);
             reset.setView(layout);
             reset.setMessage("新的密碼：");
             reset.setPositiveButton("確定", new DialogInterface.OnClickListener() {
@@ -182,7 +182,7 @@ public class person_usersetting extends AppCompatActivity {
     private View.OnClickListener usernamelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            AlertDialog.Builder reset = new AlertDialog.Builder(person_usersetting.this);
+
             RelativeLayout layout = new RelativeLayout(person_usersetting.this);
             final EditText input = new EditText(person_usersetting.this);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
@@ -198,8 +198,9 @@ public class person_usersetting extends AppCompatActivity {
 
             layout.addView(input);
 
+            AlertDialog.Builder reset = new AlertDialog.Builder(person_usersetting.this);
             reset.setTitle("更改視窗");
-            reset.setIcon(R.mipmap.reset);
+            reset.setIcon(R.drawable.setting);
             reset.setView(layout);
             reset.setMessage("新的暱稱：");
             reset.setPositiveButton("確定", new DialogInterface.OnClickListener() {
@@ -221,7 +222,9 @@ public class person_usersetting extends AppCompatActivity {
 
                 }
             });
+
             reset.show();
+
         }
     };
 
@@ -245,7 +248,7 @@ public class person_usersetting extends AppCompatActivity {
             layout.addView(input);
 
             reset.setTitle("更改視窗");
-            reset.setIcon(R.mipmap.reset);
+            reset.setIcon(R.drawable.setting);
             reset.setView(layout);
             reset.setMessage("新的email：");
             reset.setPositiveButton("確定", new DialogInterface.OnClickListener() {
