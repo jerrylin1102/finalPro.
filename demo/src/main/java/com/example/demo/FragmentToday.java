@@ -28,36 +28,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentToday#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentToday extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private ListView show_Food;
 
     public FragmentToday() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentToday.
-     */
-    // TODO: Rename and change types and number of parameters
+    }
     public static FragmentToday newInstance(String param1, String param2) {
         FragmentToday fragment = new FragmentToday();
         Bundle args = new Bundle();
@@ -116,13 +97,9 @@ public class FragmentToday extends Fragment {
                         Log.d("hi","onDataChange");
                         //輪一次資料
                         for (DataSnapshot foodSnapshot : snapshot.getChildren()) {
-                           /* Log.d("1","1="+foodSnapshot.toString());
-                            Log.e("2","2="+snapshot.getChildren().toString());
-                            Log.d("3","3="+foodSnapshot.getKey());*/
                             Log.d("kkk", String.valueOf(foodSnapshot.getKey().equals(selectedDate.toString())));
                             //檢查資料日期是否為seletedDate
                             if (foodSnapshot.getKey().equals(selectedDate.toString())){
-                                //Log.d("show","有跑進來");
                                 Log.d("show","有跑進來");
                                 foodList.clear();
                                 //把資料抓出來並加入foodList
@@ -137,16 +114,14 @@ public class FragmentToday extends Fragment {
                         Log.d("foodlist","FoodList="+foodList);
                         // 將 foodList 的內容顯示在 TextView 中
                         if (!foodList.isEmpty()) {
-                            //Log.d("Firebase", "Food List: " + "有東西!");
                             String foods = TextUtils.join(", ", foodList);
                             // 使用您的 TextView 顯示文字，確保在主線程上執行
 
                             show_Food.setAdapter(adapter);
 
                         } else {
-                            //Log.d("Firebase", "Food List: " + "沒ul4t8東西!");
                              show_Food.setAdapter(adapter);
-                            //runOnUiThread(() -> text.setText(selectedDate + " No food for selected date"));
+
                         }
                     }
 

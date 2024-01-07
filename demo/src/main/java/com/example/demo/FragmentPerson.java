@@ -22,15 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentPerson#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentPerson extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String NAMEFILE = "namefile" ;
@@ -39,23 +32,15 @@ public class FragmentPerson extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
     private ImageView icon,img_help;
     private TextView personname;
     public FragmentPerson() {
-        // Required empty public constructor
+
     }
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentPerson.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static FragmentPerson newInstance(String param1, String param2) {
         FragmentPerson fragment = new FragmentPerson();
         Bundle args = new Bundle();
@@ -64,13 +49,7 @@ public class FragmentPerson extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    /*public static FragmentPerson newInstance(String username) {//fix
-        FragmentPerson fragment = new FragmentPerson();
-        Bundle args = new Bundle();
-        args.putString("username", username);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,9 +99,6 @@ public class FragmentPerson extends Fragment {
 
             }
         });
-        //
-
-
         ImageView imgSitting=view.findViewById(R.id.setting);
         ImageView imgmaterial=view.findViewById(R.id.material);
         ImageView img_help=view.findViewById(R.id.img_help);
@@ -153,14 +129,12 @@ public class FragmentPerson extends Fragment {
                 switchImage();
             }
         });
-
-        // Inflate the layout for this fragment
         return view;
     }
     @Override//f
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-         //TextView personname= (TextView) view.findViewById(R.id.personname);
+
     }
     private String readUsername() {
         // 從 SharedPreferences 中檢索資料
