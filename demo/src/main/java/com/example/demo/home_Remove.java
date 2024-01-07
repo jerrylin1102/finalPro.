@@ -199,7 +199,6 @@ public class home_Remove extends AppCompatActivity {
                         }
                     }
                     //Log.d("Firebase", "Food List: " + foodList.toString());
-                   // ArrayAdapter<String> adapter=new ArrayAdapter<String>(home_Remove.this, android.R.layout.simple_list_item_1, foodList);
 
                     // 將 foodList 的內容顯示在 TextView 中
                     if (!foodList.isEmpty()) {
@@ -213,7 +212,6 @@ public class home_Remove extends AppCompatActivity {
                         //Log.d("Firebase", "Food List: " + "沒ul4t8東西!");
                         runOnUiThread(() -> show_Food.setAdapter(adapter));
                         Toast.makeText(home_Remove.this, selectedDate+"無資料", Toast.LENGTH_SHORT).show();
-                        //runOnUiThread(() -> text.setText(selectedDate + " No food for selected date"));
                     }
                 }
                 @Override

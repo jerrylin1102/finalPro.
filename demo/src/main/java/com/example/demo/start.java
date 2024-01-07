@@ -44,12 +44,6 @@ public class start extends AppCompatActivity {
         //save account
         userData userData = com.example.demo.userData.getInstance();
         userData.setAccount(readAccount());
-        //bundle
-        /*Bundle bundle = new Bundle();
-        bundle.putString("name", readAccount());
-        Intent intent = new Intent(this,setting.class);
-        intent.putExtras(bundle);
-        startActivity(intent);*/
         //顏色
         Window window= com.example.demo.start.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

@@ -83,7 +83,6 @@ public class home_diet_inspection extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            // 处理ChatGPT的响应，更新UI等
             //顯示
             Log.e("r","re="+result);
             String R=result.trim();
@@ -113,8 +112,7 @@ public class home_diet_inspection extends AppCompatActivity {
             // 在这里调用ChatGPT请求的示例
             //String userInput =edt.getText().toString() ; // 替换为用户实际输入
             new ChatGPTTask().execute(sendtoGPT);
-            //new ChatGPTTask().execute(entertext);
-            //
+
         }
     };
     private CompoundButton.OnCheckedChangeListener chk=new CompoundButton.OnCheckedChangeListener() {

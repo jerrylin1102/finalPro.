@@ -205,15 +205,9 @@ public class home_Search extends AppCompatActivity {
                     if(!foodList.isEmpty()){
                         String strfood=foodList.toString();//Send to GPT
                         foodresult = strfood;
-                        /*String sendtoGPT="請根據食物類別(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、" +
-                                         "油脂與堅果種子類)分類以下餐點(只需顯示有攝取到的類別完整名稱(例如:水果類、蔬菜類...等等)，不需顯示食物名稱，也不得顯示類別名稱外的其他文字，每顯示一個類別就幫我換一行。" +
-                                         "請仔細檢查每種餐點對應到的類別。每個類別名稱只能顯示一遍，不得重複出現，請一定要符合所有的規則。)餐點有："+strfood;*/
-//                        String sendtoGPT = "請根據括號內的食物類別(水果類、蔬菜類、全穀根莖類、豆蛋魚肉類、奶類、油脂與堅果種子類)列出以下所有餐點的食物類別，" +
-//                                "沒有餐點的食物類別不用顯示(只能顯示\"食物類別\"，並以條列式顯示，不要顯示\"餐點名稱\"也不要\"任何符號\"，請必須遵守以上規則與限制)："+strfood;
                         String sendtoGPT = "水果類\n蔬菜類\n全穀根莖類\n豆蛋魚肉類\n奶類\n油脂與堅果種子類\n請分析\""+strfood+
                                             "\"這些食物包含上面6個類別的哪幾個，並以條列式的方式顯示，格式為每行一類，只能顯示類別，不能顯示食物名稱。豬排屬於豆蛋魚肉類";
                         new ChatGPTTask().execute(sendtoGPT);
-                        //show.setText(sendtoGPT);
                     }else{
                         progressDialog.dismiss();
                         show.setText(null);

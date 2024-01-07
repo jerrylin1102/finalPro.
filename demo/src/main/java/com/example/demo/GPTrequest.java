@@ -50,8 +50,6 @@ public class GPTrequest {
         try {
             Response response = client.newCall(request).execute();
             String responseData = response.body().string();
-            // Handle the response data (e.g., display it in your app)
-            //System.out.println(responseData);
             info = responseData;
         } catch (Exception e) {
             e.printStackTrace();
